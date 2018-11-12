@@ -1,0 +1,21 @@
+.card {
+	width: 200px;
+	height: 200px;
+	border: 1px solid green;
+	margin: 2px;
+}
+
+.backside {
+	width: 180px;
+	height: 180px;
+	margin: 5px;
+}
+
+.hello {
+	text-align: center;
+}
+
+.game {
+	width: 50%;
+	margin: auto;
+}
