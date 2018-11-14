@@ -1,0 +1,13 @@
+.Navigation {
+    color: #fff;
+  }
+  .Navigation a {
+    color: #fff;
+  }
+  .NavigationFlexFix {
+    flex-flow:row-reverse;
+  }
+  .navbar-light .navbar-brand,
+  .navbar-light .navbar-nav .nav-link {
+    color: #fff;
+  }
