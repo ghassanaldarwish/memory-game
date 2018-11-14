@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import AvatarImg from '../common/avatar/avatar'
 import "./navigation.css";
+
 
 class Navigation extends Component {
   render() {
@@ -37,9 +39,9 @@ class Navigation extends Component {
                 Sign up
                 </a>
               </li>
-              <li className="nav-item dropdown">
+              <li className="nav-item dropdown ">
                 <a
-                  className="nav-link dropdown-toggle"
+                  className="nav-link dropdown-toggle NavLinkAvatar"
                   href="/"
                   id="navbarDropdownMenuLink"
                   role="button"
@@ -47,7 +49,7 @@ class Navigation extends Component {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  Avatar
+                  < AvatarImg/>
                 </a>
                 <div
                   className="dropdown-menu"
