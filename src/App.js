@@ -9,6 +9,7 @@ import Profile from './components/profile/profile';
 import WinGame from './components/winGame/winGame';
 import LosGame from './components/losGame/losGame';
 import EditProfile from './components/editProfile/editProfile';
+import Game from './game/game';
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
         <Signin/>
         <Signup/>
         <StartGame/>
+        <Game />
         <Profile/>
         <WinGame />
         <LosGame />

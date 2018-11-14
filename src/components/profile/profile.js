@@ -1,12 +1,15 @@
-import React, { Component } from 'react';
-import './profile.css';
+import React, { Component } from "react";
+import "./profile.css";
+import paperLayout from "../common/paperLayout/paperLayout";
 
 class Profile extends Component {
   render() {
     return (
-      <div className="Profile">
-        <p>Profile</p>
-      </div>
+        
+      <paperLayout>
+        <p>profile</p>
+       
+      </paperLayout>
     );
   }
 }

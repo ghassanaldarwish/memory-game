@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import AvatarImg from '../common/avatar/avatar'
+import AvatarImg from "../common/avatar/avatar";
 import "./navigation.css";
-
 
 class Navigation extends Component {
   render() {
@@ -22,7 +21,10 @@ class Navigation extends Component {
           >
             <span className="navbar-toggler-icon" />
           </button>
-          <div className="collapse navbar-collapse NavigationFlexFix" id="navbarNavDropdown">
+          <div
+            className="collapse navbar-collapse NavigationFlexFix"
+            id="navbarNavDropdown"
+          >
             <ul className="navbar-nav">
               <li className="nav-item active">
                 <a className="nav-link" href="/">
@@ -36,7 +38,7 @@ class Navigation extends Component {
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/">
-                Sign up
+                  Sign up
                 </a>
               </li>
               <li className="nav-item dropdown ">
@@ -49,7 +51,7 @@ class Navigation extends Component {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  < AvatarImg/>
+                  <AvatarImg />
                 </a>
                 <div
                   className="dropdown-menu"
