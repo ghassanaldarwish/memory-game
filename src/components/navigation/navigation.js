@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import AvatarImg from "../common/avatar/avatar";
 import "./navigation.css";
 
@@ -7,9 +8,9 @@ class Navigation extends Component {
     return (
       <nav className="navbar navbar-expand-lg bg-secondary navbar-light ">
         <div className="container">
-          <a className="navbar-brand" href="/">
+          <Link className="navbar-brand" to="/">
             Navbar
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -26,25 +27,30 @@ class Navigation extends Component {
             id="navbarNavDropdown"
           >
             <ul className="navbar-nav">
-              <li className="nav-item active">
-                <a className="nav-link" href="/">
+              <li className="nav-item">
+                <Link className="nav-link" to="/">
                   Home <span className="sr-only">(current)</span>
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/">
+                <Link className="nav-link" to="/signin">
                   Sign in
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/">
+                <Link className="nav-link" to="/signup">
                   Sign up
-                </a>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/startGame">
+                  Start Game
+                </Link>
               </li>
               <li className="nav-item dropdown ">
-                <a
+                <Link
                   className="nav-link dropdown-toggle NavLinkAvatar"
-                  href="/"
+                  to="/profile"
                   id="navbarDropdownMenuLink"
                   role="button"
                   data-toggle="dropdown"
@@ -52,14 +58,14 @@ class Navigation extends Component {
                   aria-expanded="false"
                 >
                   <AvatarImg />
-                </a>
+                </Link>
                 <div
                   className="dropdown-menu"
                   aria-labelledby="navbarDropdownMenuLink"
                 >
-                  <a className="dropdown-item" href="/">
+                  <Link className="dropdown-item" to="/profile">
                     Profile
-                  </a>
+                  </Link>
                   <a className="dropdown-item" href="/">
                     Logout
                   </a>

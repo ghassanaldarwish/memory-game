@@ -53,7 +53,7 @@ class Signup extends Component {
             <Avatar className={classes.avatar}>
               <LockIcon />
             </Avatar>
-            <Typography variant="headline">Sign in</Typography>
+            <Typography variant="headline">Sign up</Typography>
 
             <form className={classes.form}>
               <InputFiled fullWidth  label="User Name" required />
