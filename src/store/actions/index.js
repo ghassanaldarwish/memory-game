@@ -1,6 +1,1 @@
-export { onAuth } from "./auth";
-export {
-  onProfile,
-
-} from "./profile";
-
+export { signup, login, logout, currentUser } from "./auth";
