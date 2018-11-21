@@ -1,0 +1,137 @@
+.backgroundImg{
+  width: 100%;
+  transition: 0.7s ease-out;
+}
+.initialCardsWrapper{
+  overflow: hidden;
+}
+
+.card, .card_active, .initialCardsWrapper{
+  position: relative;
+  display: inline-block;
+  transition: 0.7s ease-out;
+  width: 120px;
+  height: 120px;
+}
+
+.card, .card_active{
+  cursor: pointer;
+  margin: 0 3px;
+  border-radius: 20px;
+}
+.initialCardsWrapper{
+  border-radius: 10px;
+  border: 2px solid;
+  cursor:default;
+}
+
+.initialCards{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 2px solid;
+}
+
+.cardFront, .cardBack, .cardBack_matched {
+  position: absolute;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 20px;
+  border: 2px solid;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.cardFront, .cardBack, .cardBack_matched  {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transition: -webkit-transform 0.6s;
+  transition: transform 0.6s;
+}
+
+.cardBack{
+  background-color: white;
+  -webkit-transform: rotateY(-180deg);
+          transform: rotateY(-180deg);
+}
+
+
+.initialCardsWrapper:hover{
+  transform: rotateY( 20deg );
+  -ms-transform: rotateY( 20deg );
+  -webkit-transform: rotateY( 20deg );
+  transition: 0.8s ease-out;
+}
+.card:hover .cardFront, .cardBack, .cardBack_matched{
+  border: 2px solid white;
+  z-index: 1;
+  transition: 0.4s ease-out;
+}
+
+.cardBack_matched{
+  background-color: #239a63;
+  border: 2px solid gold;
+  animation: cardMatched 2s 1;
+}
+
+@keyframes cardMatched {
+  from{
+    border: 2px solid gold;
+    background-color: gold;
+  }
+  to{
+    border: 2px solid gold;
+    background-color: #239a63;
+  }
+}
+
+.card:hover .gameNameOn{
+  color: gold;
+}
+
+.card_active .cardFront {
+  -webkit-transform: rotateY(-180deg);
+          transform: rotateY(-180deg);
+}
+
+.card_active .cardBack  {
+  -webkit-transform: rotateY(0);
+          transform: rotateY(0);
+}
+
+.gameName, .gameNameOn{
+  vertical-align: middle;
+  color: rgba(255, 255, 255, 0.8);
+  transition: 0.3s ease-out;
+}
+.gameName, .gameNameOn{
+  line-height: 120px;
+  font-weight: bold;
+}
+
+.gameNameOn{
+  line-height: 124px;
+  font-size: 50px;
+}
+
+@media only screen and (max-device-width: 480px) {
+
+  .card, .card_active, .initialCardsWrapper {
+    width: 80px;
+    height: 80px;
+  }
+
+  .gameName{
+    font-size: 0.6em;
+    line-height: 80px;
+  }
+  .gameNameOn{
+    font-size: 2.5em;
+    line-height: 80px;
+  }
+
+
+}

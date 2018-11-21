@@ -1,0 +1,139 @@
+.scoreBoard{
+  margin: 0 auto;
+  width:100%;
+  height: 60px;
+  position: absolute;
+  top: 50%;
+  z-index: 999;
+}
+
+.scoreBoard--active{
+  background: rgba(255, 50, 50, 0.3);
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-top: 10px;
+  width:80%;
+  min-height: 60px;
+  position: relative;
+  transition: 1s ease-out;
+}
+
+.gameButton{
+  padding: 0 10px;
+  font-size: 15px;
+  height: 40px;
+  transition: 0.8s ease-out;
+  background-color: white;
+  animation: titleButtonLight 0.9s infinite;
+  cursor: pointer;
+  animation: smokeEffect .9s forwards;
+}
+
+.gameButton:hover {
+  background-color: gold;
+  transition: 0.3s ease-out;
+  border-radius: 15px;
+}
+
+
+@keyframes titleButtonLight {
+  from{
+    background-color: white;
+  }
+  to{
+    background-color: gold;
+  }
+}
+
+
+.gameButton--active:hover {
+  background-color: gold;
+  transition: 0.3s ease-out;
+}
+
+.gameButton--active{
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  height: 40px;
+  transition: 0.8s ease-out;
+  background-color: white;
+  animation: buttonIn 1.2s forwards;
+}
+
+@keyframes buttonIn{
+  from {
+    right: -230px;
+  }
+  to {
+    right: 30px;
+  }
+}
+
+.title{
+  line-height: 60px;
+  font-size: 30px;
+  color: gold;
+  animation: smokeEffect .9s forwards;
+  text-shadow: 2px 2px 2px rgba(0,0,0, 1);
+}
+.highestScore{
+  top: 15px;
+  left: 30px;
+  font-size: 25px;
+  position: absolute;
+  color: orange;
+  animation: smokeEffect .9s forwards;
+  text-shadow: 2px 2px 2px rgba(0,0,0, 1);
+}
+
+
+@keyframes smokeEffect{
+  from {
+    transform: rotate(15deg) translateY(-200px);
+    -webkit-transform: rotate(15deg) translateY(-200px);
+    opacity: 0;
+    -webkit-filter: blur(20px);
+    filter: blur(20px);
+  }
+  to {
+    transform: rotate(0deg) translateY(0px);
+    -webkit-transform: rotate(0deg) translateY(0px);
+    opacity: 1;
+    -webkit-filter: blur(1px);
+    filter: blur(0px);
+  }
+}
+
+
+@media only screen and (max-device-width: 480px) {
+  .scoreBoard{
+    top: 43%;
+  }
+  .scoreBoard--active{
+    border-radius: 0px;
+    width:100%;
+    margin-top: 0px;
+  }
+  .title{
+    line-height: 60px;
+    font-size: 20px;
+    color: gold;
+    animation: smokeEffect .9s forwards;
+    text-shadow: 2px 2px 2px rgba(0,0,0, 1);
+  }
+  .highestScore{
+    top: 20px;
+    left: 20px;
+    font-size: 17px;
+  }
+  .gameButton--active{
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    height: 30px;
+    transition: 0.8s ease-out;
+    background-color: white;
+    animation: buttonIn 1.2s forwards;
+  }
+}

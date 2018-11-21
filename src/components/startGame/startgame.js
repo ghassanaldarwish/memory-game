@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import './startGame.css';
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
   layout: {
@@ -51,7 +52,7 @@ class StartGame extends Component {
           </div>
 
           <div className="mb-3">
-            <button type="button" class="btn btn-primary">Play</button>
+            <Link to='/game'  class="btn btn-primary">Play</Link>
           </div>
 
         </Paper>
