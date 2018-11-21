@@ -7,6 +7,9 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 import InputFiled from "../common/input/input";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import * as actions from "../../store/actions";
 import "./signup.css";
 
 const styles = theme => ({
@@ -43,8 +46,67 @@ const styles = theme => ({
 });
 
 class Signup extends Component {
+  state = {
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
+  };
+  onSubmitHandler = e => {
+    e.preventDefault();
+    this.props.signup(
+      {
+        username: this.state.username,
+        email: this.state.email,
+        password: this.state.password,
+        confirmPassword: this.state.confirmPassword
+      },
+      this.props.history
+    );
+  };
+  onChangeHandler = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
   render() {
-    const { classes } = this.props;
+    const { classes, errors } = this.props;
+    console.log(errors);
+    let errorUsername = null
+    let errorEmail = null
+    let errorPassword = null
+    let errorConfirmPassword = null
+    if (errors) {
+      if(errors.find(o => o.param === "username")){
+          errorUsername = 
+          <div class="alert alert-danger" role="alert">
+            {errors.find(o => o.param === "username").msg}
+          </div>
+        
+      }
+      if(errors.find(o => o.param === "email")){
+         errorEmail = 
+          <div class="alert alert-danger" role="alert">
+            {errors.find(o => o.param === "email").msg}
+          </div>
+        
+      }
+      if(errors.find(o => o.param === "password")){
+         errorPassword = 
+          <div class="alert alert-danger" role="alert">
+            {errors.find(o => o.param === "password").msg}
+          </div>
+        
+      }
+      if(errors.find(o => o.param === "confirmPassword")){
+         errorConfirmPassword = 
+          <div class="alert alert-danger" role="alert">
+            {errors.find(
+          o => o.param === "confirmPassword"
+        ).msg}
+          </div>
+        
+      }
+    
+    }
     return (
       <Fragment>
         <CssBaseline />
@@ -55,11 +117,50 @@ class Signup extends Component {
             </Avatar>
             <Typography variant="headline">Sign up</Typography>
 
-            <form className={classes.form}>
-              <InputFiled fullWidth  label="User Name" required />
-              <InputFiled fullWidth type="email" label="Email" required />
-              <InputFiled fullWidth type="password" label="Password" required />
-              <InputFiled fullWidth type="password" label="Confirm Password" required />
+            <form className={classes.form} onSubmit={this.onSubmitHandler}>
+              <InputFiled
+                onChange={this.onChangeHandler}
+                name="username"
+                value={this.state.username}
+                fullWidth
+                label="User Name"
+                required
+               
+              />
+              {errorUsername }
+              <InputFiled
+                onChange={this.onChangeHandler}
+                name="email"
+                value={this.state.email}
+                fullWidth
+                type="email"
+                label="Email"
+                required
+              />
+               {errorEmail }
+
+              <InputFiled
+                onChange={this.onChangeHandler}
+                name="password"
+                value={this.state.password}
+                fullWidth
+                type="password"
+                label="Password"
+                required
+              />
+               {errorPassword }
+
+              <InputFiled
+                onChange={this.onChangeHandler}
+                value={this.state.confirmPassword}
+                name="confirmPassword"
+                fullWidth
+                type="password"
+                label="Confirm Password"
+                required
+              />
+               {errorConfirmPassword }
+
               <button
                 style={{
                   background: "none",
@@ -73,6 +174,7 @@ class Signup extends Component {
                   className={classes.submit}
                   variant="contained"
                   color="primary"
+                  type="submit"
                 >
                   Sign up
                 </Button>
@@ -84,6 +186,11 @@ class Signup extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  errors: state.errors
+});
 
-export default withStyles(styles)(Signup);
-
+export default connect(
+  mapStateToProps,
+  actions
+)(withRouter(withStyles(styles)(Signup)));

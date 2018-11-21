@@ -23,7 +23,7 @@ export default function(state = initialState, action) {
     case actionType.LOGIN_SUCCEED:
       return {
         ...state,
-
+        user:action.payload,
         loading: false
       };
     case actionType.LOGIN_FAILED:

@@ -7,6 +7,9 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 import InputFiled from "../common/input/input";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import * as actions from "../../store/actions";
 import "./signin.css";
 
 const styles = theme => ({
@@ -43,8 +46,33 @@ const styles = theme => ({
 });
 
 class Signin extends Component {
+  state = {
+    email: "",
+    password: ""
+  };
+  onSubmitHandler = e => {
+    e.preventDefault();
+    this.props.login(
+      {
+        email: this.state.email,
+        password: this.state.password
+      },
+      this.props.history
+    );
+  };
+  onChangeHandler = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
   render() {
-    const { classes } = this.props;
+    const { classes, errors } = this.props;
+    let signinError = null;
+    if (errors) {
+      signinError = signinError = (
+        <div class="alert alert-danger" role="alert">
+          Email Or Password Is Invalid
+        </div>
+      );
+    }
     return (
       <Fragment>
         <CssBaseline />
@@ -54,10 +82,26 @@ class Signin extends Component {
               <LockIcon />
             </Avatar>
             <Typography variant="headline">Sign in</Typography>
-
-            <form className={classes.form}>
-              <InputFiled fullWidth type="email" label="Email" required />
-              <InputFiled fullWidth type="password" label="Password" required />
+            {signinError}
+            <form className={classes.form} onSubmit={this.onSubmitHandler}>
+              <InputFiled
+                value={this.state.email}
+                name="email"
+                fullWidth
+                type="email"
+                label="Email"
+                required
+                onChange={this.onChangeHandler}
+              />
+              <InputFiled
+                value={this.state.password}
+                name="password"
+                fullWidth
+                type="password"
+                label="Password"
+                required
+                onChange={this.onChangeHandler}
+              />
               <button
                 style={{
                   background: "none",
@@ -67,6 +111,7 @@ class Signin extends Component {
                 }}
               >
                 <Button
+                  type="submit"
                   fullWidth
                   className={classes.submit}
                   variant="contained"
@@ -82,5 +127,11 @@ class Signin extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  errors: state.errors
+});
 
-export default withStyles(styles)(Signin);
+export default connect(
+  mapStateToProps,
+  actions
+)(withRouter(withStyles(styles)(Signin)));

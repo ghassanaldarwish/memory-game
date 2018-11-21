@@ -1,6 +1,7 @@
 import * as actionType from "./actionTypes";
 import axios from "axios";
 import setAxiosAuth from "../../setAxiosAuthHeader";
+import jwt_decode from 'jwt-decode';
 
 export const signup = (data, history) => async dispatch => {
   dispatch(setPostLoading());
@@ -11,7 +12,7 @@ export const signup = (data, history) => async dispatch => {
     );
     if (user) {
       dispatch(clearErrors());
-      history.push("/login");
+      history.push("/signin");
     }
   } catch (e) {
     dispatch({
@@ -45,9 +46,11 @@ export const login = (data, history) => async dispatch => {
       localStorage.setItem("expirationDate", user.data.expirationDate);
       localStorage.setItem("userId", user.data.userId);
       setAxiosAuth(user.data.token);
+      const tokenDecoded = jwt_decode(user.data.token)
       // dispatch(checkAuthTimeout(user.data.expirationDate))
       dispatch({
-        type: actionType.LOGIN_SUCCEED
+        type: actionType.LOGIN_SUCCEED,
+        payload: tokenDecoded
       });
       history.push("/");
     }
@@ -57,8 +60,9 @@ export const login = (data, history) => async dispatch => {
     });
     dispatch({
       type: actionType.GET_ERRORS,
-      payload: e.response.data.error
+      payload: e.response.data.error || null
     });
+    console.log(e.response.data)
   }
 };
 export const logout = () => dispatch => {

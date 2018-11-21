@@ -1,10 +1,68 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import AvatarImg from "../common/avatar/avatar";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import * as actions from "../../store/actions";
 import "./navigation.css";
 
 class Navigation extends Component {
   render() {
+    let navbarCheckAuth = (
+      <Fragment>
+        {" "}
+        <li className="nav-item">
+          <Link className="nav-link" to="/signin">
+            Sign in
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/signup">
+            Sign up
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/startGame">
+            Start Game
+          </Link>
+        </li>
+      </Fragment>
+    );
+    if(this.props.user){
+      navbarCheckAuth = (
+        <Fragment>
+          <li className="nav-item">
+            <Link className="nav-link" to="/startGame">
+              Start Game
+            </Link>
+          </li>
+          <li className="nav-item dropdown ">
+                <Link
+                  className="nav-link dropdown-toggle NavLinkAvatar"
+                  to="/profile"
+                  id="navbarDropdownMenuLink"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <AvatarImg />
+                </Link>
+                <div
+                  className="dropdown-menu"
+                  aria-labelledby="navbarDropdownMenuLink"
+                >
+                  <Link className="dropdown-item" to="/profile">
+                    Profile
+                  </Link>
+                  <a onClick={actions.logout} className="dropdown-item" href="/">
+                    Logout
+                  </a>
+                </div>
+              </li>
+        </Fragment>
+      );
+    }
     return (
       <nav className="navbar navbar-expand-lg bg-secondary navbar-light ">
         <div className="container">
@@ -32,45 +90,7 @@ class Navigation extends Component {
                   Home <span className="sr-only">(current)</span>
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/signin">
-                  Sign in
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/signup">
-                  Sign up
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/startGame">
-                  Start Game
-                </Link>
-              </li>
-              <li className="nav-item dropdown ">
-                <Link
-                  className="nav-link dropdown-toggle NavLinkAvatar"
-                  to="/profile"
-                  id="navbarDropdownMenuLink"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <AvatarImg />
-                </Link>
-                <div
-                  className="dropdown-menu"
-                  aria-labelledby="navbarDropdownMenuLink"
-                >
-                  <Link className="dropdown-item" to="/profile">
-                    Profile
-                  </Link>
-                  <a className="dropdown-item" href="/">
-                    Logout
-                  </a>
-                </div>
-              </li>
+              {navbarCheckAuth}
             </ul>
           </div>
         </div>
@@ -78,5 +98,11 @@ class Navigation extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  user: state.auth.user
+});
 
-export default Navigation;
+export default connect(
+  mapStateToProps,
+  actions
+)(withRouter(Navigation));
