@@ -1,8 +1,26 @@
 import React, { Component } from 'react';
 import './home.css';
 import homer from "../../assets/homer.jpg";
+import * as actions from "../../store/actions";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import jwt_decode from 'jwt-decode';
+import setAxiosAuth from "../../setAxiosAuthHeader";
+
+
 
 class Home extends Component {
+  componentDidMount(){
+    if(localStorage.getItem("token")){
+      const token = localStorage.getItem("token")
+      setAxiosAuth(token)
+      const userDecoded=jwt_decode(token)
+      if(userDecoded){
+        this.props.currentUser(userDecoded)
+      }
+    }
+  
+  }
   render() {
     return (
 
@@ -26,7 +44,11 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default connect(
+  null,
+  actions
+)(withRouter(Home));
+
 
 // import React from 'react';
 // import PropTypes from 'prop-types';

@@ -12,7 +12,9 @@ import LosGame from "./components/losGame/losGame";
 import EditProfile from "./components/editProfile/editProfile";
 import Game from "./game/game";
 
+
 class App extends Component {
+  
   render() {
     return (
       <div className="App">

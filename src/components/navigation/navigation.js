@@ -55,7 +55,7 @@ class Navigation extends Component {
                   <Link className="dropdown-item" to="/profile">
                     Profile
                   </Link>
-                  <a onClick={actions.logout} className="dropdown-item" href="/">
+                  <a href='/' onClick={actions.logout} className="dropdown-item" href="/">
                     Logout
                   </a>
                 </div>

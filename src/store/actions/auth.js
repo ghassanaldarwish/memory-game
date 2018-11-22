@@ -65,22 +65,22 @@ export const login = (data, history) => async dispatch => {
     console.log(e.response.data)
   }
 };
-export const logout = () => dispatch => {
+export const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("userId");
   localStorage.removeItem("expirationDate");
 
-  dispatch({
+  return{
     type: actionType.LOGOUT_SUCCEED
-  });
+  };
+
 };
 
-export const currentUser = () => {
+export const currentUser = (userData) => {
   return {
-    type: actionType.CURRENT_USER,
-    userId: localStorage.getItem("userId"),
-    token: localStorage.getItem("token")
-  };
+    type: actionType.LOGIN_SUCCEED,
+    payload:userData
+  }
 };
 
 // Set loading state
