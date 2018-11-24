@@ -28,7 +28,7 @@ class Navigation extends Component {
         </li>
       </Fragment>
     );
-    if(this.props.user){
+    if (this.props.user) {
       navbarCheckAuth = (
         <Fragment>
           <li className="nav-item">
@@ -37,29 +37,34 @@ class Navigation extends Component {
             </Link>
           </li>
           <li className="nav-item dropdown ">
-                <Link
-                  className="nav-link dropdown-toggle NavLinkAvatar"
-                  to="/profile"
-                  id="navbarDropdownMenuLink"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <AvatarImg />
-                </Link>
-                <div
-                  className="dropdown-menu"
-                  aria-labelledby="navbarDropdownMenuLink"
-                >
-                  <Link className="dropdown-item" to="/profile">
-                    Profile
-                  </Link>
-                  <a href='/' onClick={actions.logout} className="dropdown-item" href="/">
-                    Logout
-                  </a>
-                </div>
-              </li>
+            <Link
+              className="nav-link dropdown-toggle NavLinkAvatar"
+              to="/profile"
+              id="navbarDropdownMenuLink"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <AvatarImg avatar={this.props.user.avatar} />
+            </Link>
+            <div
+              className="dropdown-menu"
+              aria-labelledby="navbarDropdownMenuLink"
+            >
+              <Link className="dropdown-item" to="/profile">
+                Profile
+              </Link>
+              <a
+                href="/"
+                onClick={actions.logout}
+                className="dropdown-item"
+                href="/"
+              >
+                Logout
+              </a>
+            </div>
+          </li>
         </Fragment>
       );
     }
