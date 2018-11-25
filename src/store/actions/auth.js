@@ -4,8 +4,8 @@ import setAxiosAuth from "../../setAxiosAuthHeader";
 import jwt_decode from "jwt-decode";
 
 export const signup = (data, history) => async dispatch => {
-  dispatch(setPostLoading());
   try {
+    dispatch(setAuthLoading());
     const user = await axios.post(
       "https://memory-game-7.herokuapp.com/user/signup",
       data
@@ -33,8 +33,8 @@ export const signup = (data, history) => async dispatch => {
 // }
 
 export const login = (data, history) => async dispatch => {
-  dispatch(setPostLoading());
   try {
+    dispatch(setAuthLoading());
     const user = await axios.post(
       "https://memory-game-7.herokuapp.com/user/login",
       data
@@ -42,7 +42,7 @@ export const login = (data, history) => async dispatch => {
     if (user) {
       console.log(user);
       dispatch(clearErrors());
-      localStorage.setItem("token", user.data.token);
+      localStorage.setItem("tokenMemory", user.data.token);
       localStorage.setItem("expirationDate", user.data.expirationDate);
       localStorage.setItem("userId", user.data.userId);
       setAxiosAuth(user.data.token);
@@ -66,7 +66,7 @@ export const login = (data, history) => async dispatch => {
   }
 };
 export const logout = () => {
-  localStorage.removeItem("token");
+  localStorage.removeItem("tokenMemory");
   localStorage.removeItem("userId");
   localStorage.removeItem("expirationDate");
 
@@ -83,9 +83,9 @@ export const currentUser = userData => {
 };
 
 // Set loading state
-export const setPostLoading = () => {
+export const setAuthLoading = () => {
   return {
-    type: actionType.LOADING
+    type: actionType.AUTH_LOADING
   };
 };
 

@@ -10,7 +10,9 @@ import InputFiled from "../common/input/input";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import * as actions from "../../store/actions";
+import FormHelperText from "@material-ui/core/FormHelperText";
 import "./signup.css";
+import Spinner from "../common/spinner/spinner";
 
 const styles = theme => ({
   layout: {
@@ -70,46 +72,56 @@ class Signup extends Component {
   render() {
     const { classes, errors } = this.props;
     console.log(errors);
-    let errorUsername = null
-    let errorEmail = null
-    let errorPassword = null
-    let errorConfirmPassword = null
+    let errorUsername = null;
+    let errorEmail = null;
+    let errorPassword = null;
+    let errorConfirmPassword = null;
     if (errors) {
-      if(errors.find(o => o.param === "username")){
-          errorUsername = 
-          <div class="alert alert-danger" role="alert">
+      if (errors.find(o => o.param === "username")) {
+        errorUsername = (
+          <FormHelperText className="ml-3" error id="component-error-text">
             {errors.find(o => o.param === "username").msg}
-          </div>
-        
+          </FormHelperText>
+          // <div class="alert alert-danger" role="alert">
+          //   {errors.find(o => o.param === "username").msg}
+          // </div>
+        );
       }
-      if(errors.find(o => o.param === "email")){
-         errorEmail = 
-          <div class="alert alert-danger" role="alert">
+      if (errors.find(o => o.param === "email")) {
+        errorEmail = (
+          <FormHelperText className="ml-3" error id="component-error-text">
             {errors.find(o => o.param === "email").msg}
-          </div>
-        
+          </FormHelperText>
+        );
+        // <div class="alert alert-danger" role="alert">
+        //   {errors.find(o => o.param === "email").msg}
+        // </div>
       }
-      if(errors.find(o => o.param === "password")){
-         errorPassword = 
-          <div class="alert alert-danger" role="alert">
+      if (errors.find(o => o.param === "password")) {
+        errorPassword = (
+          <FormHelperText className="ml-3" error id="component-error-text">
             {errors.find(o => o.param === "password").msg}
-          </div>
-        
+          </FormHelperText>
+          // <div class="alert alert-danger" role="alert">
+          //   {errors.find(o => o.param === "password").msg}
+          // </div>
+        );
       }
-      if(errors.find(o => o.param === "confirmPassword")){
-         errorConfirmPassword = 
-          <div class="alert alert-danger" role="alert">
-            {errors.find(
-          o => o.param === "confirmPassword"
-        ).msg}
-          </div>
-        
+      if (errors.find(o => o.param === "confirmPassword")) {
+        errorConfirmPassword = (
+          <FormHelperText className="ml-3" error id="component-error-text">
+            {errors.find(o => o.param === "confirmPassword").msg}
+          </FormHelperText>
+          // <div class="alert alert-danger" role="alert">
+          //   {errors.find(o => o.param === "confirmPassword").msg}
+          // </div>
+        );
       }
-    
     }
     return (
       <Fragment>
         <CssBaseline />
+
         <div className={classes.layout}>
           <Paper className={classes.paper}>
             <Avatar className={classes.avatar}>
@@ -117,69 +129,76 @@ class Signup extends Component {
             </Avatar>
             <Typography variant="headline">Sign up</Typography>
 
-            <form className={classes.form} onSubmit={this.onSubmitHandler}>
-              <InputFiled
-                onChange={this.onChangeHandler}
-                name="username"
-                value={this.state.username}
-                fullWidth
-                label="User Name"
-                required
-               
-              />
-              {errorUsername }
-              <InputFiled
-                onChange={this.onChangeHandler}
-                name="email"
-                value={this.state.email}
-                fullWidth
-                type="email"
-                label="Email"
-                required
-              />
-               {errorEmail }
-
-              <InputFiled
-                onChange={this.onChangeHandler}
-                name="password"
-                value={this.state.password}
-                fullWidth
-                type="password"
-                label="Password"
-                required
-              />
-               {errorPassword }
-
-              <InputFiled
-                onChange={this.onChangeHandler}
-                value={this.state.confirmPassword}
-                name="confirmPassword"
-                fullWidth
-                type="password"
-                label="Confirm Password"
-                required
-              />
-               {errorConfirmPassword }
-
-              <button
-                style={{
-                  background: "none",
-                  border: "none",
-                  display: "block",
-                  width: "100%"
-                }}
-              >
-                <Button
+            {this.props.loading ? (
+              <Spinner />
+            ) : (
+              <form className={classes.form} onSubmit={this.onSubmitHandler}>
+                <InputFiled
+                  error={errorUsername ? true : false}
+                  onChange={this.onChangeHandler}
+                  name="username"
+                  value={this.state.username}
                   fullWidth
-                  className={classes.submit}
-                  variant="contained"
-                  color="primary"
-                  type="submit"
+                  label="User Name"
+                  required
+                />
+                {errorUsername}
+                <InputFiled
+                  error={errorEmail ? true : false}
+                  onChange={this.onChangeHandler}
+                  name="email"
+                  value={this.state.email}
+                  fullWidth
+                  type="email"
+                  label="Email"
+                  required
+                />
+                {errorEmail}
+
+                <InputFiled
+                  error={errorPassword ? true : false}
+                  onChange={this.onChangeHandler}
+                  name="password"
+                  value={this.state.password}
+                  fullWidth
+                  type="password"
+                  label="Password"
+                  required
+                />
+                {errorPassword}
+
+                <InputFiled
+                  error={errorConfirmPassword ? true : false}
+                  onChange={this.onChangeHandler}
+                  value={this.state.confirmPassword}
+                  name="confirmPassword"
+                  fullWidth
+                  type="password"
+                  label="Confirm Password"
+                  required
+                />
+                {errorConfirmPassword}
+
+                <button
+                  style={{
+                    background: "none",
+                    border: "none",
+                    display: "block",
+                    width: "100%"
+                  }}
                 >
-                  Sign up
-                </Button>
-              </button>
-            </form>
+                  <Button
+                    fullWidth
+                    className={classes.submit}
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                  >
+                    Sign up
+                  </Button>
+                </button>
+              </form>
+            )}
           </Paper>
         </div>
       </Fragment>
@@ -187,7 +206,8 @@ class Signup extends Component {
   }
 }
 const mapStateToProps = state => ({
-  errors: state.errors
+  errors: state.errors,
+  loading: state.auth.loading
 });
 
 export default connect(

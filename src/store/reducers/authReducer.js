@@ -2,7 +2,7 @@ import * as actionType from "../actions/actionTypes";
 
 const initialState = {
   user: null,
-  token:null,
+  token: null,
   loading: false
 };
 
@@ -15,7 +15,7 @@ export default function(state = initialState, action) {
         token: action.token
       };
 
-    case actionType.LOADING:
+    case actionType.AUTH_LOADING:
       return {
         ...state,
         loading: true
@@ -23,7 +23,7 @@ export default function(state = initialState, action) {
     case actionType.LOGIN_SUCCEED:
       return {
         ...state,
-        user:action.payload,
+        user: action.payload,
         loading: false
       };
     case actionType.LOGIN_FAILED:

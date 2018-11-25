@@ -1,34 +1,18 @@
-import React, { Component } from 'react';
-import './home.css';
+import React, { Component } from "react";
+import "./home.css";
 import homer from "../../assets/homer.jpg";
 import * as actions from "../../store/actions";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import jwt_decode from 'jwt-decode';
-import setAxiosAuth from "../../setAxiosAuthHeader";
-
-
 
 class Home extends Component {
-  componentDidMount(){
-    if(localStorage.getItem("token")){
-      const token = localStorage.getItem("token")
-      setAxiosAuth(token)
-      const userDecoded=jwt_decode(token)
-      if(userDecoded){
-        this.props.currentUser(userDecoded)
-      }
-    }
-  
-  }
   render() {
     return (
-
       <div className="Home bg-overlay container-fluid">
         <div className="m-auto">
           <h1>How good is your memory ???</h1>
 
-          <img src={homer} alt="oh noo"/>
+          <img src={homer} alt="oh noo" />
           <h2>Create your own interactive memory game</h2>
           <ul className="ulist">
             <li>upload your own images with just a few clicks</li>
@@ -38,7 +22,6 @@ class Home extends Component {
 
           <p>Give it a try push START</p>
         </div>
-
       </div>
     );
   }
@@ -48,7 +31,6 @@ export default connect(
   null,
   actions
 )(withRouter(Home));
-
 
 // import React from 'react';
 // import PropTypes from 'prop-types';

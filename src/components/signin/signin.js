@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import * as actions from "../../store/actions";
 import "./signin.css";
+import Spinner from "../common/spinner/spinner";
 
 const styles = theme => ({
   layout: {
@@ -81,46 +82,52 @@ class Signin extends Component {
             <Avatar className={classes.avatar}>
               <LockIcon />
             </Avatar>
-            <Typography variant="headline">Sign in</Typography>
-            {signinError}
-            <form className={classes.form} onSubmit={this.onSubmitHandler}>
-              <InputFiled
-                value={this.state.email}
-                name="email"
-                fullWidth
-                type="email"
-                label="Email"
-                required
-                onChange={this.onChangeHandler}
-              />
-              <InputFiled
-                value={this.state.password}
-                name="password"
-                fullWidth
-                type="password"
-                label="Password"
-                required
-                onChange={this.onChangeHandler}
-              />
-              <button
-                style={{
-                  background: "none",
-                  border: "none",
-                  display: "block",
-                  width: "100%"
-                }}
-              >
-                <Button
-                  type="submit"
-                  fullWidth
-                  className={classes.submit}
-                  variant="contained"
-                  color="primary"
-                >
-                  Sign in
-                </Button>
-              </button>
-            </form>
+            {this.props.loading ? (
+              <Spinner />
+            ) : (
+              <Fragment>
+                <Typography variant="headline">Sign in</Typography>
+                {signinError}
+                <form className={classes.form} onSubmit={this.onSubmitHandler}>
+                  <InputFiled
+                    value={this.state.email}
+                    name="email"
+                    fullWidth
+                    type="email"
+                    label="Email"
+                    required
+                    onChange={this.onChangeHandler}
+                  />
+                  <InputFiled
+                    value={this.state.password}
+                    name="password"
+                    fullWidth
+                    type="password"
+                    label="Password"
+                    required
+                    onChange={this.onChangeHandler}
+                  />
+                  <button
+                    style={{
+                      background: "none",
+                      border: "none",
+                      display: "block",
+                      width: "100%"
+                    }}
+                  >
+                    <Button
+                      type="submit"
+                      fullWidth
+                      className={classes.submit}
+                      variant="contained"
+                      color="primary"
+                    >
+                      Sign in
+                    </Button>
+                  </button>
+                </form>
+              </Fragment>
+            )}
           </Paper>
         </div>
       </Fragment>
@@ -128,7 +135,8 @@ class Signin extends Component {
   }
 }
 const mapStateToProps = state => ({
-  errors: state.errors
+  errors: state.errors,
+  loading: state.auth.loading
 });
 
 export default connect(

@@ -1,24 +1,24 @@
-.scoreBoard{
+.scoreBoard {
   margin: 0 auto;
-  width:100%;
+  width: 100%;
   height: 60px;
   position: absolute;
   top: 50%;
   z-index: 999;
 }
 
-.scoreBoard--active{
+.scoreBoard--active {
   background: rgba(255, 50, 50, 0.3);
   border-radius: 10px;
   margin: 0 auto;
-  margin-top: 10px;
-  width:80%;
+
+  width: 80%;
   min-height: 60px;
   position: relative;
   transition: 1s ease-out;
 }
 
-.gameButton{
+.gameButton {
   padding: 0 10px;
   font-size: 15px;
   height: 40px;
@@ -26,7 +26,7 @@
   background-color: white;
   animation: titleButtonLight 0.9s infinite;
   cursor: pointer;
-  animation: smokeEffect .9s forwards;
+  animation: smokeEffect 0.9s forwards;
 }
 
 .gameButton:hover {
@@ -35,23 +35,21 @@
   border-radius: 15px;
 }
 
-
 @keyframes titleButtonLight {
-  from{
+  from {
     background-color: white;
   }
-  to{
+  to {
     background-color: gold;
   }
 }
-
 
 .gameButton--active:hover {
   background-color: gold;
   transition: 0.3s ease-out;
 }
 
-.gameButton--active{
+.gameButton--active {
   position: absolute;
   top: 10px;
   right: 30px;
@@ -61,7 +59,7 @@
   animation: buttonIn 1.2s forwards;
 }
 
-@keyframes buttonIn{
+@keyframes buttonIn {
   from {
     right: -230px;
   }
@@ -70,25 +68,24 @@
   }
 }
 
-.title{
+.title {
   line-height: 60px;
   font-size: 30px;
   color: gold;
-  animation: smokeEffect .9s forwards;
-  text-shadow: 2px 2px 2px rgba(0,0,0, 1);
+  animation: smokeEffect 0.9s forwards;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 1);
 }
-.highestScore{
+.highestScore {
   top: 15px;
   left: 30px;
   font-size: 25px;
   position: absolute;
   color: orange;
-  animation: smokeEffect .9s forwards;
-  text-shadow: 2px 2px 2px rgba(0,0,0, 1);
+  animation: smokeEffect 0.9s forwards;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 1);
 }
 
-
-@keyframes smokeEffect{
+@keyframes smokeEffect {
   from {
     transform: rotate(15deg) translateY(-200px);
     -webkit-transform: rotate(15deg) translateY(-200px);
@@ -105,29 +102,28 @@
   }
 }
 
-
 @media only screen and (max-device-width: 480px) {
-  .scoreBoard{
+  .scoreBoard {
     top: 43%;
   }
-  .scoreBoard--active{
+  .scoreBoard--active {
     border-radius: 0px;
-    width:100%;
+    width: 100%;
     margin-top: 0px;
   }
-  .title{
+  .title {
     line-height: 60px;
     font-size: 20px;
     color: gold;
-    animation: smokeEffect .9s forwards;
-    text-shadow: 2px 2px 2px rgba(0,0,0, 1);
+    animation: smokeEffect 0.9s forwards;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 1);
   }
-  .highestScore{
+  .highestScore {
     top: 20px;
     left: 20px;
     font-size: 17px;
   }
-  .gameButton--active{
+  .gameButton--active {
     position: absolute;
     top: 15px;
     right: 30px;

@@ -11,10 +11,22 @@ import WinGame from "./components/winGame/winGame";
 import LosGame from "./components/losGame/losGame";
 import EditProfile from "./components/editProfile/editProfile";
 import Game from "./game/game";
-
+import jwt_decode from "jwt-decode";
+import setAxiosAuth from "./setAxiosAuthHeader";
+import * as actions from "./store/actions";
+import store from "./store";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 class App extends Component {
-  
+  componentDidMount() {
+    if (localStorage.getItem("tokenMemory")) {
+      const token = localStorage.getItem("tokenMemory");
+      setAxiosAuth(token);
+      const userDecoded = jwt_decode(token);
+      store.dispatch(actions.currentUser(userDecoded));
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -25,7 +37,7 @@ class App extends Component {
           <Route path="/signup" exact component={Signup} />
           <Route path="/startGame" exact component={StartGame} />
           <Route path="/game" exact component={Game} />
-          <Route path="/profile" exact component={Profile} />
+          <PrivateRoute path="/profile" exact component={Profile} />
           <Redirect to="/" />
         </Switch>
       </div>

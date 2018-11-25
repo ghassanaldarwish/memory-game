@@ -36,6 +36,12 @@ class Navigation extends Component {
               Start Game
             </Link>
           </li>
+          <li className="nav-item">
+            {" "}
+            <Link className="nav-link ml-3 pr-0" to="/profile">
+              {this.props.user.username}
+            </Link>
+          </li>
           <li className="nav-item dropdown ">
             <Link
               className="nav-link dropdown-toggle NavLinkAvatar"

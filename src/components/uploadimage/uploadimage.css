@@ -1,5 +1,9 @@
 .uploadform {
-	/* border: 2px solid; */
-	box-shadow: 3px 3px 7px rgba(0, 0, 0, .5);
-	margin-top: 5rem;
+  /* border: 2px solid; */
+  box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.5);
+  margin-top: 5rem;
+  width: 50vw;
+  margin: auto;
+  padding: 1px 0;
+  margin-bottom: 10px;
 }
