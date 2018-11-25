@@ -3,16 +3,19 @@ import axios from "axios";
 import setAxiosAuth from "../../setAxiosAuthHeader";
 import jwt_decode from "jwt-decode";
 
-export const signup = (data, history) => async dispatch => {
+export const signup = (dataUser, history) => async dispatch => {
   try {
     dispatch(setAuthLoading());
     const user = await axios.post(
       "https://memory-game-7.herokuapp.com/user/signup",
-      data
+      dataUser
     );
     if (user) {
       dispatch(clearErrors());
       history.push("/signin");
+      dispatch({
+        type: actionType.LOGIN_SUCCEED
+      });
     }
   } catch (e) {
     dispatch({
@@ -24,13 +27,6 @@ export const signup = (data, history) => async dispatch => {
     });
   }
 };
-// export const checkAuthTimeout = (expiresTime) => {
-//    return dispatch => {
-//        setTimeout(() => {
-//            dispatch(logout())
-//        }, expiresTime)
-//    }
-// }
 
 export const login = (data, history) => async dispatch => {
   try {
@@ -47,7 +43,6 @@ export const login = (data, history) => async dispatch => {
       localStorage.setItem("userId", user.data.userId);
       setAxiosAuth(user.data.token);
       const tokenDecoded = jwt_decode(user.data.token);
-      // dispatch(checkAuthTimeout(user.data.expirationDate))
       dispatch({
         type: actionType.LOGIN_SUCCEED,
         payload: tokenDecoded
@@ -62,7 +57,6 @@ export const login = (data, history) => async dispatch => {
       type: actionType.GET_ERRORS,
       payload: e.response.data.error || null
     });
-    console.log(e.response.data);
   }
 };
 export const logout = () => {

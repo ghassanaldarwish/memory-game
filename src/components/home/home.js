@@ -8,7 +8,7 @@ import { withRouter } from "react-router-dom";
 class Home extends Component {
   render() {
     return (
-      <div className="Home bg-overlay container-fluid">
+      <div className="Home bg-overlay container-fluid ">
         <div className="m-auto">
           <h1>How good is your memory ???</h1>
 
