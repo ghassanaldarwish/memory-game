@@ -135,7 +135,7 @@ class Signin extends Component {
   }
 }
 const mapStateToProps = state => ({
-  errors: state.errors,
+  errors: state.errors || null,
   loading: state.auth.loading
 });
 
