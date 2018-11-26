@@ -18,3 +18,5 @@ export const SHOW_CARD = "SHOW_CARD";
 export const HIDE_CARD = "HIDE_CARD";
 export const COMPLETE = "COMPLETE";
 export const SET_SCORE = "SET_SCORE";
+
+export const IMGS_URL_SUCCEED = "IMGS_URL_SUCCEED";

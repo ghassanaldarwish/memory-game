@@ -10,3 +10,5 @@ export {
   gameComplete,
   setHighScore
 } from "./game";
+
+export { onImgsData } from "./gameImgsData";

@@ -24,37 +24,12 @@ const styles = theme => ({
 });
 
 class UploadImage extends Component {
-  onSubmitHandlerImg1 = e => {
-    e.preventDefault();
-    console.log("hello img 1");
-  };
-
-  onSubmitHandlerImg2 = e => {
-    e.preventDefault();
-    console.log("hello img 2");
-  };
-  onSubmitHandlerImg3 = e => {
-    e.preventDefault();
-    console.log("hello img 3");
-  };
-  onSubmitHandlerImg4 = e => {
-    e.preventDefault();
-    console.log("hello img 4");
-  };
-  onSubmitHandlerImg5 = e => {
-    e.preventDefault();
-    console.log("hello img 5");
-  };
-
+ 
   render() {
     const { classes } = this.props;
     return (
       <div className="uploadform">
-        <UploadForm onSubmitHandler={this.onSubmitHandlerImg1} />
-        <UploadForm onSubmitHandler={this.onSubmitHandlerImg2} />
-        <UploadForm onSubmitHandler={this.onSubmitHandlerImg3} />
-        <UploadForm onSubmitHandler={this.onSubmitHandlerImg4} />
-        <UploadForm onSubmitHandler={this.onSubmitHandlerImg5} />
+        <UploadForm />
       </div>
     );
   }
