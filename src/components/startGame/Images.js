@@ -11,7 +11,8 @@ export default props =>
         className='delete'
       >
         {/* <FontAwesomeIcon icon={faTimesCircle} size='2x' /> */}
+				X
       </div>
-      <img src={image.secure_url} alt='' />
+      <img src={image} alt='' />
     </div>
   )

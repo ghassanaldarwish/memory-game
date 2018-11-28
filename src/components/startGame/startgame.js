@@ -45,8 +45,9 @@ class StartGame extends Component {
     images: []
   }
 
-  onChange = e => {
-    const files = Array.from(e.target.files)
+  onSubmit = e => {
+    e.preventDefault();
+    const files = Array.from(e.target.elements.gameImgs.files)
     this.setState({ uploading: true })
 
     const formData = new FormData()
@@ -55,19 +56,14 @@ class StartGame extends Component {
       formData.append('gameImgs', file)
     })
 
-    console.log(e.target.files);
-
     fetch(`/game/game-data/${this.props.user.id}`, {
       method: 'POST',
       body: formData
     })
-
-    .then(res => res.json())
     .then(images => {
       this.setState({
-        uploading: false,
-        images
-      })
+        uploading: false
+      });
     })
   }
 
@@ -77,25 +73,28 @@ class StartGame extends Component {
     })
   }
 
-  render() {
-    console.log(this.props.user)
-    const { uploading, images } = this.state
+  onChange = e => {
+    const files = Array.from(e.target.files);
+    this.setState({
+      images: files.map(file => {
+        return URL.createObjectURL(file)
+      })
+    })
+  }
 
-    const content = () => {
-      switch(true) {
-        case uploading:
-          return <Spinner />
-        case images.length > 0:
-          return <Images images={images} removeImage={this.removeImage} />
-        default:
-          return <Buttons onChange={this.onChange} />
-      }
-    }
+  render() {
+
+    const { uploading, images } = this.state
 
     return (
       <div>
         <div className='buttons'>
-          {content()}
+          {uploading
+            ? <Spinner />
+            : <Fragment>
+                <Buttons onSubmit={this.onSubmit} onChange={this.onChange} />
+                <Images images={images} removeImage={this.removeImage} />
+              </Fragment>}
         </div>
       </div>
     )
