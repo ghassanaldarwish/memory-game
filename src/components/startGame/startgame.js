@@ -21,7 +21,8 @@ import axios from "axios";
 import Spinner from "../common/spinner/spinner";
 import Images from './Images';
 import Buttons from './Buttons';
-// import { API_URL } from './config';
+import UploadImageForm from './uploadImageForm'
+
 import "./startGame.css";
 
 const styles = {
@@ -48,11 +49,13 @@ class StartGame extends Component {
   onSubmit = e => {
     e.preventDefault();
     const files = Array.from(e.target.elements.gameImgs.files)
+    console.log(files)
     this.setState({ uploading: true })
 
     const formData = new FormData()
 
     files.forEach((file, i) => {
+
       formData.append('gameImgs', file)
     })
 
@@ -62,14 +65,16 @@ class StartGame extends Component {
     })
     .then(images => {
       this.setState({
-        uploading: false
+        uploading: false,
+        images: []
       });
     })
   }
 
+
   removeImage = id => {
     this.setState({
-      images: this.state.images.filter(image => image.public_id !== id)
+      images: this.state.images.filter(image => id !== id)
     })
   }
 
@@ -85,16 +90,18 @@ class StartGame extends Component {
   render() {
 
     const { uploading, images } = this.state
-
     return (
       <div>
         <div className='buttons'>
           {uploading
             ? <Spinner />
             : <Fragment>
-                <Buttons onSubmit={this.onSubmit} onChange={this.onChange} />
-                <Images images={images} removeImage={this.removeImage} />
-              </Fragment>}
+              <UploadImageForm />
+              <UploadImageForm />
+              <UploadImageForm />
+              <UploadImageForm />
+              <UploadImageForm />
+            </Fragment>}
         </div>
       </div>
     )
@@ -110,3 +117,12 @@ export default connect(
   mapStateToProps,
   actions
 )(withStyles(styles)(StartGame));
+
+
+
+
+//
+// <Fragment>
+//                 <Buttons onSubmit={this.onSubmit} onChange={this.onChange} />
+//                 <Images images={images} removeImage={this.removeImage} />
+//               </Fragment>
