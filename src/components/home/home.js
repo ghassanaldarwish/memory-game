@@ -11,8 +11,9 @@ class Home extends Component {
       <div className="Home bg-overlay container-fluid ">
         <div className="m-auto">
           <h1>How good is your memory ???</h1>
-
+          <button type="button" class="btn btn-default btn-lg mr-5"><img src="images/car.jpg" alt=""/>Play Now!</button>
           <img src={homer} alt="oh noo" />
+          <button type="button" class="btn btn-primary btn-lg ml-5">Personalise Game</button>
           <h2>Create your own interactive memory game</h2>
           <ul className="ulist">
             <li>upload your own images with just a few clicks</li>
