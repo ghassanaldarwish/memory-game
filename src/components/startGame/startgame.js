@@ -1,7 +1,3 @@
-
-
-import homer from "../../assets/homer.jpg";
-
 import React, { Component, Fragment } from "react";
 
 // import classNames from 'classnames';
@@ -18,9 +14,9 @@ import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
 import axios from "axios";
-import Spinner from "../common/spinner/spinner";
-import Images from './Images';
-import Buttons from './Buttons';
+// import Spinner from "../common/spinner/spinner";
+// import Images from './Images';
+// import Buttons from './Buttons';
 import UploadImageForm from './uploadImageForm'
 
 import "./startGame.css";
@@ -42,66 +38,96 @@ const styles = {
 class StartGame extends Component {
 
   state = {
-    uploading: false,
-    images: []
+    imgData: [
+      {
+        name: 'image1',
+        filedata: null,
+        imgUrl: null
+
+      },
+      {
+        name: 'image2',
+        filedata: null,
+        imgUrl: null
+      },
+      {
+        name: 'image3',
+        filedata: null,
+        imgUrl: null
+      },
+      {
+        name: 'image4',
+        filedata: null,
+        imgUrl: null
+      },
+      {
+        name: 'image5',
+        filedata: null,
+        imgUrl: null
+      },
+      {
+        name: 'image6',
+        filedata: null,
+        imgUrl: null
+      },
+      {
+        name: 'image7',
+        filedata: null,
+        imgUrl: null
+      },
+      {
+        name: 'image8',
+        filedata: null,
+        imgUrl: null
+      }
+    ]
+
   }
 
-  onSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
-    const files = Array.from(e.target.elements.gameImgs.files)
-    console.log(files)
-    this.setState({ uploading: true })
 
-    const formData = new FormData()
+  console.log('Submit Handler')
 
-    files.forEach((file, i) => {
 
-      formData.append('gameImgs', file)
+  };
+
+  onChangeHandler = (e) => {
+    console.log('Change Handler')
+    const updateState ={
+      ...this.state,
+      imgData:[...this.state.imgData]
+
+    }
+  const newimgData =  updateState.imgData.map(item=>{
+      if(item.name === e.target.name){
+        item.filedata = e.target.files[0]
+        item.imgUrl=URL.createObjectURL(e.target.files[0])
+      }
     })
-
-    fetch(`/game/game-data/${this.props.user.id}`, {
-      method: 'POST',
-      body: formData
-    })
-    .then(images => {
-      this.setState({
-        uploading: false,
-        images: []
-      });
-    })
-  }
-
-
-  removeImage = id => {
-    this.setState({
-      images: this.state.images.filter(image => id !== id)
-    })
-  }
-
-  onChange = e => {
-    const files = Array.from(e.target.files);
-    this.setState({
-      images: files.map(file => {
-        return URL.createObjectURL(file)
-      })
-    })
+    this.setState({imgData:updateState.imgData})
+      console.log(updateState)
+        console.log({[e.target.name] : e.target.files[0]})
   }
 
   render() {
-
-    const { uploading, images } = this.state
+    const checkArrayLength = this.state.imgData.filter(item=>item.filedata !== null).length
+console.log(this.state.imgData)
     return (
       <div>
         <div className='buttons'>
-          {uploading
-            ? <Spinner />
-            : <Fragment>
-              <UploadImageForm />
-              <UploadImageForm />
-              <UploadImageForm />
-              <UploadImageForm />
-              <UploadImageForm />
-            </Fragment>}
+
+
+             <Fragment>
+               <p>{checkArrayLength}</p>
+              <form onSubmit={this.handleSubmit} className="container" style={{marginTop: 125}}>
+                <UploadImageForm onChange={this.onChangeHandler} imgData={this.state.imgData} />
+                <button
+                  disabled={checkArrayLength !== 8 }
+                   type="submit">upload{checkArrayLength}</button>
+            </form>
+            </Fragment>
+
         </div>
       </div>
     )
@@ -117,12 +143,3 @@ export default connect(
   mapStateToProps,
   actions
 )(withStyles(styles)(StartGame));
-
-
-
-
-//
-// <Fragment>
-//                 <Buttons onSubmit={this.onSubmit} onChange={this.onChange} />
-//                 <Images images={images} removeImage={this.removeImage} />
-//               </Fragment>
