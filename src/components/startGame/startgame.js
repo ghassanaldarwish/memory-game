@@ -83,26 +83,33 @@ class StartGame extends Component {
 
 
 			let formData = new FormData();
+
 			formData.append("gameImgs", this.state.imgData);
+			this.state.imgData.map(item=>{
+				formData.append("gameImgs", item.filedata);	
+			})
+			
 			this.setState({loading: true});
 			// send data to BE
-			axios({
+			 axios({
 				url: "https://memory-game-7.herokuapp.com/game/game-data/" + this.props.user.id,
 				method: "POST",
 				headers: {
 					"Content-Type": "multipart/form-data"
 				},
 				data: formData
-			}).then(imgsData => {
+			}).then(res=> {
 				this.setState({loading: false});
 				// this.props.onImgsData(imgsData.data)
-				console.log(imgsData.data)
+				console.log('data from backend',res.data)
+				this.props.onImgsData(res.data)
 
 			}).catch(e => {
+				console.log(e)
 				this.setState({loading: false});
 				this.props.history.push("/startGame");
-			});
-			console.log('imgs file submited', this.state.gameImgsFile)
+			}); 
+			console.log('imgs file submited', this.state.imgData)
 
 
 
@@ -138,10 +145,11 @@ class StartGame extends Component {
 					<p>{checkArrayLength}</p>
 					<form onSubmit={this.onSubmitHandler} className="container" style={{
 							marginTop: 125
-						}} enctype="multipart/form-data">
+						}} encType="multipart/form-data">
 						<UploadImageForm onChange={this.onChangeHandler} imgData={this.state.imgData}/>
 						<button disabled={checkArrayLength !== 8} type="submit">upload{checkArrayLength}</button>
 					</form>
+					{this.props.gameImgsData && <p> https://ghassanooooo.github.io/customise-memory-game/{this.props.gameImgsData.user}</p>}
 				</Fragment>
 
 			</div>
@@ -149,6 +157,9 @@ class StartGame extends Component {
 	}
 }
 
-const mapStateToProps = state => ({user: state.auth.user});
+const mapStateToProps = state => ({
+	user: state.auth.user,
+	gameImgsData:state.gameImgsData
+});
 
 export default connect(mapStateToProps, actions)(withStyles(styles)(StartGame));
