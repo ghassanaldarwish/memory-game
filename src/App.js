@@ -37,6 +37,7 @@ class App extends Component {
           <Route path="/signup" exact component={Signup} />
           <Route path="/startGame" exact component={StartGame} />
           <Route path="/game" exact component={Game} />
+          <Route path="/game-custom/:id" exact component={Game} />
           <PrivateRoute path="/profile" exact component={Profile} />
           <Redirect to="/" />
         </Switch>

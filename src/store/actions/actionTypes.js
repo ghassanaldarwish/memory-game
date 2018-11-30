@@ -20,3 +20,4 @@ export const COMPLETE = "COMPLETE";
 export const SET_SCORE = "SET_SCORE";
 
 export const IMGS_URL_SUCCEED = "IMGS_URL_SUCCEED";
+export const FETCT_CURRENT_GAME = "FETCT_CURRENT_GAME";
