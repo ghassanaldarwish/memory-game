@@ -18,7 +18,8 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "shortid": "^2.2.14"
   },
   "scripts": {
     "start-js": "react-scripts start",
@@ -27,5 +28,6 @@
     "build": "npm-run-all build-js",
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build"
-  }
+  },
+  "proxy": "http://localhost:5000/"
 }
