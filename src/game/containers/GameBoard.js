@@ -71,7 +71,7 @@ class GameBoard extends Component {
           <img
             className="backgroundImg"
             onLoad={this.handleImageLoaded.bind(this)}
-            src={this.props.gameId ? backgroudImgCard : "assets/img/back.jpg"}
+            src={this.props.gameId ? backgroudImgCard : backgroudImgCard}
             alt="backgroudImg"
           />
         </div>
