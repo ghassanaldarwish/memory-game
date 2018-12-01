@@ -3,16 +3,48 @@ import "./home.css";
 import homer from "../../assets/homer.jpg";
 import * as actions from "../../store/actions";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-
+import { withRouter, Link } from "react-router-dom";
+import WOW from "wowjs";
 class Home extends Component {
+  componentDidMount() {
+    const wow = new WOW.WOW();
+    wow.init();
+  }
   render() {
     return (
       <div className="Home bg-overlay container-fluid ">
         <div className="m-auto">
           <h1>How good is your memory ???</h1>
 
-          <img src={homer} alt="oh noo" />
+          <Link
+            to="/game"
+            type="button"
+            className="wow bounceInLeft btn btn-primary btn-lg btn-block "
+            style={{
+              height: "12vh",
+              width: "35vw",
+              margin: "5vh auto",
+              fontSize: "35px",
+              padding: "10px"
+            }}
+          >
+            <i class="fas fa-gamepad mr-2" /> Play Now
+          </Link>
+          <Link
+            to="/startGame"
+            type="button"
+            className="wow bounceInRight btn btn-danger btn-lg btn-block"
+            style={{
+              height: "12vh",
+              width: "35vw",
+              margin: "5vh auto",
+              fontSize: "35px",
+              padding: "10px"
+            }}
+          >
+            <i class="fas fa-hammer mr-2" />
+            Create Your Game
+          </Link>
           <h2>Create your own interactive memory game</h2>
           <ul className="ulist">
             <li>upload your own images with just a few clicks</li>

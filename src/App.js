@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import "./App.css";
 import Navigation from "./components/navigation/navigation";
@@ -16,6 +16,8 @@ import setAxiosAuth from "./setAxiosAuthHeader";
 import * as actions from "./store/actions";
 import store from "./store";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+import Register from "./components/register/register";
 
 class App extends Component {
   componentDidMount() {
@@ -24,6 +26,7 @@ class App extends Component {
       setAxiosAuth(token);
       const userDecoded = jwt_decode(token);
       store.dispatch(actions.currentUser(userDecoded));
+      store.dispatch(actions.getCurrentGame(userDecoded.id));
     }
   }
 
@@ -31,16 +34,27 @@ class App extends Component {
     return (
       <div className="App">
         <Navigation />
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/signin" exact component={Signin} />
-          <Route path="/signup" exact component={Signup} />
-          <Route path="/startGame" exact component={StartGame} />
-          <Route path="/game" exact component={Game} />
-          <Route path="/game-custom/:id" exact component={Game} />
-          <PrivateRoute path="/profile" exact component={Profile} />
-          <Redirect to="/" />
-        </Switch>
+        <Route
+          render={({ location }) => (
+            <TransitionGroup>
+              <CSSTransition key={location.key} timeout={80} classNames="fade">
+                <Fragment>
+                  <Switch location={location}>
+                    <Route path="/" exact component={Home} />
+                    <Route path="/signin" exact component={Signin} />
+                    <Route path="/signup" exact component={Signup} />
+                    <Route path="/startGame" exact component={StartGame} />
+                    <Route path="/register" exact component={Register} />
+                    <Route path="/game" exact component={Game} />
+                    <Route path="/game-custom/:id" exact component={Game} />
+                    <PrivateRoute path="/profile" exact component={Profile} />
+                    <Redirect to="/" />
+                  </Switch>
+                </Fragment>
+              </CSSTransition>
+            </TransitionGroup>
+          )}
+        />
       </div>
     );
   }

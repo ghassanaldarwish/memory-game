@@ -7,9 +7,12 @@ import jwt_decode from "jwt-decode";
 import setAxiosAuth from "../setAxiosAuthHeader";
 import * as actions from "../store/actions";
 import store from "../store";
+import WOW from "wowjs";
 
 class Game extends Component {
   componentDidMount() {
+    const wow = new WOW.WOW();
+    wow.init();
     if (localStorage.getItem("tokenMemory")) {
       const token = localStorage.getItem("tokenMemory");
       setAxiosAuth(token);
@@ -19,7 +22,7 @@ class Game extends Component {
   }
   render() {
     return (
-      <div className="App">
+      <div className="wow zoomIn App">
         <ScoreBoard gameId={this.props.match.params.id} />
         <GameBoard gameId={this.props.match.params.id} />
       </div>

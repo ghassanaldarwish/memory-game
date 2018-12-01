@@ -47,7 +47,7 @@ export const login = (data, history) => async dispatch => {
         type: actionType.LOGIN_SUCCEED,
         payload: tokenDecoded
       });
-      history.push("/");
+      history.push("/startGame");
     }
   } catch (e) {
     dispatch({
