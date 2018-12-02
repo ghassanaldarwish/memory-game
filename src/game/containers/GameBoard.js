@@ -5,7 +5,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as actions from "../../store/actions";
 import "../css/GameBoard.css";
-import backgroudImgCard from "../../assets/back.jpg";
+
+import matchSound from "../../assets/matchSound.wav";
+import ReactAudioPlayer from "react-audio-player";
 
 class GameBoard extends Component {
   componentDidUpdate() {
@@ -69,9 +71,15 @@ class GameBoard extends Component {
       initialCards.push(
         <div key={i} className="initialCardsWrapper">
           <img
+            style={{ width: "100%", height: "100%" }}
             className="backgroundImg"
             onLoad={this.handleImageLoaded.bind(this)}
-            src={this.props.gameId ? backgroudImgCard : "assets/img/back.jpg"}
+            //    src={this.props.gameId ? backgroudImgCard : backgroudImgCard}
+            src={
+              this.props.gameId
+                ? " https://i.pinimg.com/originals/58/17/85/581785ed38d3e41c25a22163c845abec.jpg"
+                : " https://i.pinimg.com/originals/58/17/85/581785ed38d3e41c25a22163c845abec.jpg"
+            }
             alt="backgroudImg"
           />
         </div>
@@ -84,6 +92,9 @@ class GameBoard extends Component {
     cards = cards.map((card, i) => {
       return (
         <div className={card.flipped ? "card_active" : "card"} key={i}>
+          {card.matched && !this.props.isCompleted && (
+            <ReactAudioPlayer src={matchSound} autoPlay />
+          )}
           <Card
             index={i}
             card={card}

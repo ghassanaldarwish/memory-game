@@ -1,9 +1,13 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { withRouter } from "react-router-dom";
 import * as actions from "../../store/actions";
 import "../css/ScoreBoard.css";
+import music from "../../assets/game.mp3";
+import winSound from "../../assets/winSound.wav";
+import ReactAudioPlayer from "react-audio-player";
 
 class ScoreBoard extends Component {
   componentDidUpdate() {
@@ -13,9 +17,15 @@ class ScoreBoard extends Component {
   }
 
   render() {
+    console.log("woooooooooooow", this.props);
     //show score board when scoreOn is true
     let showScore = this.props.scoreOn ? (
       <div>
+        {this.props.match.params.name && (
+          <span className="h6">
+            The Game created By: {this.props.match.params.name}
+          </span>
+        )}
         <div className="title">{this.props.score} pt</div>
         <div className="highestScore">HS: {this.props.highScore} pt</div>
       </div>
@@ -56,13 +66,22 @@ class ScoreBoard extends Component {
     );
 
     return (
-      <div
-        className={this.props.isStarting ? "scoreBoard--active" : "scoreBoard"}
-      >
-        {loadingPage}
-        {showScore}
-        {button}
-      </div>
+      <Fragment>
+        {this.props.isCompleted && <ReactAudioPlayer src={winSound} autoPlay />}
+        {this.props.cards.length > 0 && !this.props.isCompleted && (
+          <ReactAudioPlayer src={music} autoPlay loop volume={0.6} />
+        )}
+
+        <div
+          className={
+            this.props.isStarting ? "scoreBoard--active" : "scoreBoard"
+          }
+        >
+          {loadingPage}
+          {showScore}
+          {button}
+        </div>
+      </Fragment>
     );
   }
 }
@@ -87,4 +106,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ScoreBoard);
+)(withRouter(ScoreBoard));

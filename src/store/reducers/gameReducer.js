@@ -44,6 +44,7 @@ export default function game(state = INITIAL_STATE, action) {
     case actionType.HIDE_CARD:
       return {
         ...state,
+        isCompleted: false,
         score: 0,
         scoreOn: true,
         gameOn: true,

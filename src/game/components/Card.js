@@ -1,8 +1,15 @@
 import React, { Component } from "react";
 import "../css/Card.css";
 import backgroudImgCard from "../../assets/back.jpg";
+import WOW from "wowjs";
 
 class Card extends Component {
+  componentDidMount() {
+    console.log("ghassanooooooooo", this.props.matchCard);
+
+    const wow = new WOW.WOW();
+    wow.init();
+  }
   handleClickFlipCard() {
     if (!this.props.isLocked) {
       this.props.flipCard(this.props.index, this.props.card.cardName);
