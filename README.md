@@ -1,44 +1,51 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Memory Game (MERN full stack app)
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
+![Screenshot](src/assets/mem-home.gif)
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+> A memory game. Find 2 matching cards. You can play the default version, or create your personal game by uploading your own images.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## See it live
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+[MERN al-developer-back-front live on heroku](https://al-developer.herokuapp.com/)
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+## Quick Start
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+# Install dependencies for server
+npm install
 
-### `npm run eject`
+# Install dependencies for client
+npm run client-install
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# Run the client & server with concurrently
+npm run dev
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Run the Express server only
+npm run server
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Run the React client only
+npm run client
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# Server runs on http://localhost:5000 and client on http://localhost:3000
+```
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## App Info
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Author
+
+Ghassan Aldarwish
+[my website](http://ghassanaldarwish.de/)
+
+### Version
+
+1.0.0
+
+### License
+
+This project is licensed under the MIT License
