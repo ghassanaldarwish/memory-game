@@ -8,7 +8,8 @@ export {
   lockCard,
   matchCard,
   gameComplete,
-  setHighScore
+  setHighScore,
+  startCustomGame
 } from "./game";
 
-export { onImgsData } from "./gameImgsData";
+export { onImgsData, getCurrentGame } from "./gameImgsData";

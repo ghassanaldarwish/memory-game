@@ -4,12 +4,12 @@
       rgba(0, 100, 0, 0.7),
       rgba(0, 0, 100, 0.9)
     ),
-    url("../../assets/mem-home.png");
+    url("../../assets/mem-home.gif");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center center;
   color: #fff;
-  height: 100vh;
+  height: 91.5vh;
   padding-top: 50px;
 }
 

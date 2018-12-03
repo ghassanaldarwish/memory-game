@@ -2,6 +2,7 @@ import * as actionType from "./actionTypes";
 import axios from "axios";
 import setAxiosAuth from "../../setAxiosAuthHeader";
 import jwt_decode from "jwt-decode";
+import * as actions from "./index";
 
 export const signup = (dataUser, history) => async dispatch => {
   try {
@@ -23,7 +24,7 @@ export const signup = (dataUser, history) => async dispatch => {
     });
     dispatch({
       type: actionType.GET_ERRORS,
-      payload: e.response.data.error || null
+      payload: e.response ? e.response.data.error : null
     });
   }
 };
@@ -43,11 +44,12 @@ export const login = (data, history) => async dispatch => {
       localStorage.setItem("userId", user.data.userId);
       setAxiosAuth(user.data.token);
       const tokenDecoded = jwt_decode(user.data.token);
+      actions.getCurrentGame(tokenDecoded.id);
       dispatch({
         type: actionType.LOGIN_SUCCEED,
         payload: tokenDecoded
       });
-      history.push("/");
+      history.push("/startGame");
     }
   } catch (e) {
     dispatch({
@@ -55,7 +57,7 @@ export const login = (data, history) => async dispatch => {
     });
     dispatch({
       type: actionType.GET_ERRORS,
-      payload: e.response.data.error || null
+      payload: e.response.data ? e.response.data.error : null
     });
   }
 };

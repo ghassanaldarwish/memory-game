@@ -12,18 +12,21 @@ class Navigation extends Component {
       <Fragment>
         {" "}
         <li className="nav-item">
-          <Link className="nav-link" to="/signin">
+          <Link
+            style={{ marginRight: "8px", color: "#fff" }}
+            className="btn btn-outline-primary"
+            to="/signin"
+          >
             Sign in
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/signup">
+          <Link
+            style={{ color: "#fff" }}
+            className="btn btn-outline-danger"
+            to="/signup"
+          >
             Sign up
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/startGame">
-            Start Game
           </Link>
         </li>
       </Fragment>
@@ -31,11 +34,6 @@ class Navigation extends Component {
     if (this.props.user) {
       navbarCheckAuth = (
         <Fragment>
-          <li className="nav-item">
-            <Link className="nav-link" to="/startGame">
-              Start Game
-            </Link>
-          </li>
           <li className="nav-item">
             {" "}
             <Link className="nav-link ml-3 pr-0" to="/profile">
@@ -77,9 +75,9 @@ class Navigation extends Component {
     return (
       <nav className="navbar navbar-expand-lg bg-secondary navbar-light ">
         <div className="container">
-          <Link className="navbar-brand" to="/">
-            Navbar
-          </Link>
+          <a className="navbar-brand" href="/">
+            Memory Game
+          </a>
           <button
             className="navbar-toggler"
             type="button"
@@ -95,14 +93,7 @@ class Navigation extends Component {
             className="collapse navbar-collapse NavigationFlexFix"
             id="navbarNavDropdown"
           >
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <Link className="nav-link" to="/">
-                  Home <span className="sr-only">(current)</span>
-                </Link>
-              </li>
-              {navbarCheckAuth}
-            </ul>
+            <ul className="navbar-nav">{navbarCheckAuth}</ul>
           </div>
         </div>
       </nav>
