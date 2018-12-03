@@ -37,10 +37,16 @@ npm run client
 
 ## App Info
 
-### Author
+### Team Members
 
 Ghassan Aldarwish
 [my website](http://ghassanaldarwish.de/)
+
+Jürgen Schuler Web Developer
+[juergens-website](https://bierwurst.github.io/)
+[juergens-github account](https://github.com/Bierwurst)
+
+
 
 ### Version
 
