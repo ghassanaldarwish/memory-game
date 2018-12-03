@@ -1,11 +1,11 @@
-## Memory Game (MERN ffull stack app)
+## Memory Game (MERN full stack app)
 
 
 
 ![Screenshot](src/assets/mem-home.gif)
 
 
-> A quick walkthrough of my al-developer app built using React, React Router, Redux ,Express and mongoDB, the project current
+> A memory game. Find 2 matching cards. You can play the default version, or create your personal game by uploading your own images.
 
 
 
