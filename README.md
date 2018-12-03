@@ -39,12 +39,21 @@ npm run client
 
 ### Team Members
 
-Ghassan Aldarwish
-[my website](http://ghassanaldarwish.de/)
+
+
 
 Jürgen Schuler Web Developer
 [juergens-website](https://bierwurst.github.io/)
 [juergens-github account](https://github.com/Bierwurst)
+
+Ghassan Aldarwish Full Stack Web Developer
+[Ghassan's website](http://ghassanaldarwish.de/)
+[Ghassan's-github account](https://github.com/Ghassanooooo)
+
+Isaac Giwa Web Developer
+[Isaac's-github account](https://github.com/MrHezekiah)
+
+
 
 
 
