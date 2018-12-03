@@ -4,9 +4,13 @@
 
 ![Screenshot](src/assets/mem-home.gif)
 
+![Screenshot](wireframe.jpg)
+### Our Wireframe 
+
 
 > A memory game. Find 2 matching cards. You can play the default version, or create your personal game by uploading your own images.
 
+> This is a group final project which was undertaken as part of the requirement for the completion of a 12 months Web Development course at the Digital Career Institute, Berlin. 
 
 
 ## See it live
