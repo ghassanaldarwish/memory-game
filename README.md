@@ -11,7 +11,7 @@
 
 ## See it live
 
-[MERN al-developer-back-front live on heroku](https://al-developer.herokuapp.com/)
+[Memory Game live on firebase platform](https://memory-game-fb235.firebaseapp.com/)
 
 ## Quick Start
 
