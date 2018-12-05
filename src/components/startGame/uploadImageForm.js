@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import Checkbox from './checkbox'
 
 class UploadImageForm extends Component {
   constructor(props) {
@@ -25,6 +26,8 @@ class UploadImageForm extends Component {
   render() {
     return (
       <Fragment>
+        {/* <Checkbox /> */}
+    
         <div class="row container">
           {this.props.imgData.map((item, i) => (
             <div key={i} class="col-md-3 col-sm-4 col-6 mb-4">
@@ -32,7 +35,7 @@ class UploadImageForm extends Component {
                 {item.imgUrl && (
                   <img
                     style={{ width: "100%", height: "100%" }}
-                    src={item.imgUrl}
+                    src={item.imgUrl} alt=""
                   />
                 )}
                 <div class="card-body">

@@ -60,32 +60,32 @@ class StartGame extends Component {
         name: "image3",
         filedata: null,
         imgUrl: null
-      },
-      {
-        name: "image4",
-        filedata: null,
-        imgUrl: null
-      },
-      {
-        name: "image5",
-        filedata: null,
-        imgUrl: null
-      },
-      {
-        name: "image6",
-        filedata: null,
-        imgUrl: null
-      },
-      {
-        name: "image7",
-        filedata: null,
-        imgUrl: null
-      },
-      {
-        name: "image8",
-        filedata: null,
-        imgUrl: null
       }
+      // {
+      //   name: "image4",
+      //   filedata: null,
+      //   imgUrl: null
+      // },
+      // {
+      //   name: "image5",
+      //   filedata: null,
+      //   imgUrl: null
+      // },
+      // {
+      //   name: "image6",
+      //   filedata: null,
+      //   imgUrl: null
+      // },
+      // {
+      //   name: "image7",
+      //   filedata: null,
+      //   imgUrl: null
+      // },
+      // {
+      //   name: "image8",
+      //   filedata: null,
+      //   imgUrl: null
+      // }
     ]
   };
   componentWillMount() {
@@ -93,6 +93,17 @@ class StartGame extends Component {
       actions.getCurrentGame(this.props.user.id);
     }
   }
+  onClickHandler = e => {
+    this.setState({
+      imgData: [...this.state.imgData,
+        {
+          name: 'image'+(this.state.imgData.length+1),
+          filedata: null,
+          imgUrl: null
+        }]
+    })
+    console.log(this.state.imgData);
+    console.log(this.state.imgData.length);  }
 
   onSubmitHandler = e => {
     e.preventDefault();
@@ -197,7 +208,8 @@ class StartGame extends Component {
     const checkArrayLength = this.state.imgData.filter(
       item => item.filedata !== null
     ).length;
-    console.log(this.state.imgData);
+    const checkArrayLength1 = this.state.imgData.length;
+    // console.log(this.state.imgData);
     let uploadButtonStyle = "btn btn-outline-secondary";
 
     let uploadIconStyleR = "fas fa-arrow-right";
@@ -223,6 +235,8 @@ class StartGame extends Component {
           >
             Upload Your Custom Images
           </h1>
+          <button type="button" onClick={this.onClickHandler} class="btn btn-success" disabled={checkArrayLength1 === 8}>+ more images</button>
+
           <form
             onSubmit={this.onSubmitHandler}
             className="container"
