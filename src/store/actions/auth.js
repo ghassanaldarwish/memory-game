@@ -12,10 +12,19 @@ export const signup = (dataUser, history) => async dispatch => {
       dataUser
     );
     if (user) {
+  history.push("/startGame");
+      console.log('Hallo token',user.data);
       dispatch(clearErrors());
-      history.push("/signin");
+      localStorage.setItem("tokenMemory", user.data);
+
+      setAxiosAuth(user.data);
+      const tokenDecoded = jwt_decode(user.data);
+      actions.getCurrentGame(tokenDecoded.id);
+
+
       dispatch({
-        type: actionType.LOGIN_SUCCEED
+        type: actionType.LOGIN_SUCCEED,
+            payload: tokenDecoded
       });
     }
   } catch (e) {

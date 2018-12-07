@@ -137,7 +137,7 @@ class StartGame extends Component {
       .then(res => {
         this.setState({ loading: false });
         // this.props.onImgsData(imgsData.data)
-        console.log("data from backend", res.data);
+        console.log("data from backend LoLLLLLLLLLLLLLLLLL", res.data);
         this.props.onImgsData(res.data);
         // this.setState({
         //   imgData: [
