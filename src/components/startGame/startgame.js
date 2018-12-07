@@ -2,15 +2,16 @@ import React, { Component, Fragment } from "react";
 
 // import classNames from 'classnames';
 import { withStyles } from "@material-ui/core/styles";
-import Avatar from "@material-ui/core/Avatar";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import FormControl from "@material-ui/core/FormControl";
-import TextField from "@material-ui/core/TextField";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import IconButton from "@material-ui/core/IconButton";
-import PhotoCamera from "@material-ui/icons/PhotoCamera";
+// import Avatar from "@material-ui/core/Avatar";
+// import Input from "@material-ui/core/Input";
+// import InputLabel from "@material-ui/core/InputLabel";
+// import InputAdornment from "@material-ui/core/InputAdornment";
+// import FormControl from "@material-ui/core/FormControl";
+// import TextField from "@material-ui/core/TextField";
+
+// import AccountCircle from "@material-ui/icons/AccountCircle";
+// import IconButton from "@material-ui/core/IconButton";
+// import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
 import { withRouter, Link } from "react-router-dom";
@@ -19,7 +20,7 @@ import axios from "axios";
 // import Images from './Images';
 // import Buttons from './Buttons';
 import UploadImageForm from "./uploadImageForm";
-import ip from "ip";
+// import ip from "ip";
 import Spinner from "../common/spinner/spinner";
 import WOW from "wowjs";
 import "./startGame.css";
@@ -45,6 +46,7 @@ const styles = {
 class StartGame extends Component {
   state = {
     loading: false,
+    gamesize: 3,
     imgData: [
       {
         name: "image1",
@@ -94,15 +96,21 @@ class StartGame extends Component {
     }
   }
   onClickHandler = e => {
-    this.setState({
-      imgData: [...this.state.imgData,
-        {
-          name: 'image'+(this.state.imgData.length+1),
-          filedata: null,
-          imgUrl: null
-        }]
-    })
-    console.log(this.state.imgData);
+    let newImageData = {
+      ...this.state,
+      gamesize: this.state.imgData.length,
+      imgData: [...this.state.imgData]
+    }
+    newImageData.imgData.push({
+           name: 'image'+(this.state.imgData.length+1),
+           filedata: null,
+           imgUrl: null
+         })
+  console.log('new State', newImageData.imgData);
+  this.setState({
+    imgData : newImageData.imgData
+  })
+
     console.log(this.state.imgData.length);  }
 
   onSubmitHandler = e => {
@@ -119,8 +127,7 @@ class StartGame extends Component {
     // send data to BE
     axios({
       url:
-        "https://memory-game-7.herokuapp.com/game/game-data/" +
-        this.props.user.id,
+        /*"https://memory-game-7.herokuapp.com*/  `/game/game-data/${this.props.user.id}/${this.state.imgData.length}`,
       method: "POST",
       headers: {
         "Content-Type": "multipart/form-data"
@@ -132,50 +139,50 @@ class StartGame extends Component {
         // this.props.onImgsData(imgsData.data)
         console.log("data from backend", res.data);
         this.props.onImgsData(res.data);
-        this.setState({
-          imgData: [
-            {
-              name: "image1",
-              filedata: null,
-              imgUrl: null
-            },
-            {
-              name: "image2",
-              filedata: null,
-              imgUrl: null
-            },
-            {
-              name: "image3",
-              filedata: null,
-              imgUrl: null
-            },
-            {
-              name: "image4",
-              filedata: null,
-              imgUrl: null
-            },
-            {
-              name: "image5",
-              filedata: null,
-              imgUrl: null
-            },
-            {
-              name: "image6",
-              filedata: null,
-              imgUrl: null
-            },
-            {
-              name: "image7",
-              filedata: null,
-              imgUrl: null
-            },
-            {
-              name: "image8",
-              filedata: null,
-              imgUrl: null
-            }
-          ]
-        });
+        // this.setState({
+        //   imgData: [
+        //     {
+        //       name: "image1",
+        //       filedata: null,
+        //       imgUrl: null
+        //     },
+        //     {
+        //       name: "image2",
+        //       filedata: null,
+        //       imgUrl: null
+        //     },
+        //     {
+        //       name: "image3",
+        //       filedata: null,
+        //       imgUrl: null
+        //     },
+        //     {
+        //       name: "image4",
+        //       filedata: null,
+        //       imgUrl: null
+        //     },
+        //     {
+        //       name: "image5",
+        //       filedata: null,
+        //       imgUrl: null
+        //     },
+        //     {
+        //       name: "image6",
+        //       filedata: null,
+        //       imgUrl: null
+        //     },
+        //     {
+        //       name: "image7",
+        //       filedata: null,
+        //       imgUrl: null
+        //     },
+        //     {
+        //       name: "image8",
+        //       filedata: null,
+        //       imgUrl: null
+        //     }
+        //   ]
+        // });
       })
       .catch(e => {
         console.log(e);
@@ -205,6 +212,7 @@ class StartGame extends Component {
   };
 
   render() {
+        console.log('real new state', this.state.imgData, this.state);
     const checkArrayLength = this.state.imgData.filter(
       item => item.filedata !== null
     ).length;
@@ -260,7 +268,7 @@ class StartGame extends Component {
                 }}
               />
             )}
-            <button
+            {/* <button
               style={{
                 height: "10vh",
                 width: "35vw",
@@ -280,18 +288,27 @@ class StartGame extends Component {
                   <i class="fas fa-upload" /> UPLOAD
                 </Fragment>
               )}
+            </button> */}
+            <button
+              style={{
+                height: "10vh",
+                width: "35vw",
+                margin: "5vh auto",
+                fontSize: "35px",
+                padding: "10px"
+              }}
+              data-wow-duration="3s"
+              className={uploadButtonStyle}
+
+              type="submit"
+            >
+
+                <Fragment>
+                  <i class="fas fa-upload" /> UPLOAD
+                </Fragment>
+
             </button>
-            {checkArrayLength === 8 && (
-              <i
-                data-wow-duration="5s"
-                class={uploadIconStyleL}
-                style={{
-                  fontSize: "45px",
-                  padding: "0 15px",
-                  color: "blue"
-                }}
-              />
-            )}
+
           </form>
           {this.props.loading ? (
             <Spinner />
@@ -425,7 +442,8 @@ class StartGame extends Component {
 const mapStateToProps = state => ({
   user: state.auth.user,
   gameImgsData: state.gameImgsData.gameImgsData,
-  loading: state.gameImgsData.loading
+  loading: state.gameImgsData.loading,
+  gamesize: state.gamesize
 });
 
 export default connect(
