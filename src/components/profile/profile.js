@@ -51,7 +51,7 @@ class ProfilePicture extends Component {
     this.setState({ loading: true });
     axios({
       url:
-        "https://memory-game-7.herokuapp.com/user/avatar/" + this.props.user.id,
+        /*"https://memory-game-7.herokuapp.com*/"/user/avatar/" + this.props.user.id,
       method: "POST",
       headers: {
         "Content-Type": "multipart/form-data"
