@@ -45,6 +45,7 @@ const styles = {
 
 class StartGame extends Component {
   state = {
+    email: "",
     loading: false,
     gamesize: 3,
     imgData: [
@@ -197,6 +198,11 @@ class StartGame extends Component {
     console.log(this.state.imgData.length);
   };
 
+  onSubmitEmailHandler = e => {
+    e.preventDefault();
+    console.log(" the game sent to: ", this.state.email);
+  };
+
   render() {
     console.log("real new state", this.state.imgData, this.state);
     const checkArrayLength = this.state.imgData.filter(
@@ -263,6 +269,81 @@ class StartGame extends Component {
                             <i class="fas fa-share-alt" /> Share The Game With
                             Your Friends 🤖:
                           </label>
+                          <button
+                            type="button"
+                            class="btn btn-primary mb-3"
+                            data-toggle="modal"
+                            data-target="#exampleModalCenter"
+                          >
+                            <i class="fas fa-at mr-1" /> Share By Email
+                          </button>
+
+                          <div
+                            class="modal fade"
+                            id="exampleModalCenter"
+                            tabindex="-1"
+                            role="dialog"
+                            aria-labelledby="exampleModalCenterTitle"
+                            aria-hidden="true"
+                          >
+                            <div
+                              class="modal-dialog modal-dialog-centered"
+                              role="document"
+                            >
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5
+                                    class="modal-title"
+                                    id="exampleModalCenterTitle"
+                                  >
+                                    Share With Frinds By Email
+                                  </h5>
+                                  <button
+                                    type="button"
+                                    class="close"
+                                    data-dismiss="modal"
+                                    aria-label="Close"
+                                  >
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <form onSubmit={this.onSubmitEmailHandler}>
+                                    <div class="form-group">
+                                      <label for="exampleInputEmail1">
+                                        Email address
+                                      </label>
+                                      <input
+                                        onChange={e =>
+                                          this.setState({
+                                            email: e.target.value
+                                          })
+                                        }
+                                        name="email"
+                                        type="email"
+                                        class="form-control"
+                                        id="exampleInputEmail1"
+                                        aria-describedby="emailHelp"
+                                        placeholder="Enter email"
+                                      />
+                                      <small
+                                        id="emailHelp"
+                                        class="form-text text-muted"
+                                      >
+                                        please typing a valid email address
+                                      </small>
+                                    </div>
+                                    <button
+                                      type="submit"
+                                      class="btn btn-primary"
+                                    >
+                                      send
+                                    </button>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
 
                           <textarea
                             style={{
