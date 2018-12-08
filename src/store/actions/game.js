@@ -2,9 +2,10 @@ import * as actionType from "./actionTypes";
 import axios from "axios";
 import generateCards from "../../game/data/generateCards";
 
-export function onGameImgsData() {
+export function onGameImgsData(gameSize) {
   return {
-    type: actionType.GAME_IMGS_DATA
+    type: actionType.GAME_IMGS_DATA,
+    gameSize: gameSize || null
   };
 }
 

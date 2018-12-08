@@ -13,6 +13,8 @@ export const signup = (dataUser, history) => async dispatch => {
       dataUser
     );
     if (user) {
+      history.push("/startGame");
+      console.log("Hallo token", user.data);
       dispatch(clearErrors());
       history.push("/startGame");
       localStorage.setItem("tokenMemory", user.data);

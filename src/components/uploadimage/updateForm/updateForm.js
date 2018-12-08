@@ -42,7 +42,7 @@
 //       // send data to BE
 //       axios({
 //         url:
-//           "https://memory-game-7.herokuapp.com/game/game-data/" +
+//           /*"https://memory-game-7.herokuapp.com*/"/game/game-data/" +
 //           this.props.user.id,
 //         method: "POST",
 //         headers: {
