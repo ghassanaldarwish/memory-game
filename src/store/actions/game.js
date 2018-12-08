@@ -1,6 +1,13 @@
 import * as actionType from "./actionTypes";
 import axios from "axios";
 import generateCards from "../../game/data/generateCards";
+
+export function onGameImgsData() {
+  return {
+    type: actionType.GAME_IMGS_DATA
+  };
+}
+
 export function pageLoading() {
   return {
     type: actionType.PAGE_LOADING

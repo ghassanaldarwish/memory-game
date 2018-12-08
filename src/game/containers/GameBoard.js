@@ -65,7 +65,11 @@ class GameBoard extends Component {
   render() {
     let cardsList = [];
     let initialCards = [];
-
+    // let cardsItems =
+    //   (this.props.gameImgsData.gameImgsData &&
+    //     this.props.gameImgsData.gameImgsData.imgsGame.length > 16 &&
+    //     this.props.gameImgsData.gameImgsData.gamesize * 2) ||
+    //   16;
     //initial card background
     for (let i = 0; i < 16; i++) {
       initialCards.push(
@@ -73,7 +77,7 @@ class GameBoard extends Component {
           <img
             style={{ width: "100%", height: "100%" }}
             className="backgroundImg"
-            onLoad={this.handleImageLoaded.bind(this)}
+            // onLoad={this.handleImageLoaded.bind(this)}
             //    src={this.props.gameId ? backgroudImgCard : backgroudImgCard}
             src={
               this.props.gameId
@@ -125,6 +129,8 @@ class GameBoard extends Component {
 
 const mapStateToProps = state => {
   return {
+    gameImgsData: null,
+    isPageLoading: state.game.isPageLoading,
     cards: state.game.cards,
     isStarting: state.game.isStarting,
     isLocked: state.game.isLocked,

@@ -9,7 +9,8 @@ export {
   matchCard,
   gameComplete,
   setHighScore,
-  startCustomGame
+  startCustomGame,
+  onGameImgsData
 } from "./game";
 
 export { onImgsData, getCurrentGame } from "./gameImgsData";

@@ -2,6 +2,7 @@ import * as actionType from "../actions/actionTypes";
 import generateCards from "../../game/data/generateCards";
 
 const INITIAL_STATE = {
+  gameSize: null,
   isPageLoading: false,
   cards: [],
   isStarting: false,
@@ -16,6 +17,11 @@ const INITIAL_STATE = {
 
 export default function game(state = INITIAL_STATE, action) {
   switch (action.type) {
+    case actionType.GAME_IMGS_DATA:
+      return {
+        ...state,
+        gameSize: action.gameSize
+      };
     case actionType.PAGE_LOADING:
       return {
         ...state,

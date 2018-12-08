@@ -60,31 +60,6 @@ class StartGame extends Component {
         name: "image3",
         filedata: null,
         imgUrl: null
-      },
-      {
-        name: "image4",
-        filedata: null,
-        imgUrl: null
-      },
-      {
-        name: "image5",
-        filedata: null,
-        imgUrl: null
-      },
-      {
-        name: "image6",
-        filedata: null,
-        imgUrl: null
-      },
-      {
-        name: "image7",
-        filedata: null,
-        imgUrl: null
-      },
-      {
-        name: "image8",
-        filedata: null,
-        imgUrl: null
       }
     ]
   };
@@ -109,7 +84,10 @@ class StartGame extends Component {
     axios({
       url:
         "https://memory-game-7.herokuapp.com/game/game-data/" +
-        this.props.user.id,
+        //  "http://localhost:5000/game/game-data/" +
+        this.props.user.id +
+        "/" +
+        this.state.imgData.length,
       method: "POST",
       headers: {
         "Content-Type": "multipart/form-data"
@@ -121,6 +99,7 @@ class StartGame extends Component {
         // this.props.onImgsData(imgsData.data)
         console.log("data from backend", res.data);
         this.props.onImgsData(res.data);
+
         this.setState({
           imgData: [
             {
@@ -135,31 +114,6 @@ class StartGame extends Component {
             },
             {
               name: "image3",
-              filedata: null,
-              imgUrl: null
-            },
-            {
-              name: "image4",
-              filedata: null,
-              imgUrl: null
-            },
-            {
-              name: "image5",
-              filedata: null,
-              imgUrl: null
-            },
-            {
-              name: "image6",
-              filedata: null,
-              imgUrl: null
-            },
-            {
-              name: "image7",
-              filedata: null,
-              imgUrl: null
-            },
-            {
-              name: "image8",
               filedata: null,
               imgUrl: null
             }
@@ -192,6 +146,36 @@ class StartGame extends Component {
       [e.target.name]: e.target.files[0]
     });
   };
+  onClickHandlerMore = e => {
+    let newImageData = {
+      ...this.state,
+      imgData: [...this.state.imgData]
+    };
+    newImageData.imgData.push({
+      name: "image" + (this.state.imgData.length + 1),
+      filedata: null,
+      imgUrl: null
+    });
+    console.log("new State", newImageData.imgData);
+    this.setState({
+      imgData: newImageData.imgData
+    });
+
+    console.log(this.state.imgData.length);
+  };
+  onClickHandlerLess = () => {
+    let newImageData = {
+      ...this.state,
+      imgData: [...this.state.imgData]
+    };
+    newImageData.imgData.pop();
+    console.log("new State", newImageData.imgData);
+    this.setState({
+      imgData: newImageData.imgData
+    });
+
+    console.log(this.state.imgData.length);
+  };
 
   render() {
     const checkArrayLength = this.state.imgData.filter(
@@ -202,7 +186,7 @@ class StartGame extends Component {
 
     let uploadIconStyleR = "fas fa-arrow-right";
     let uploadIconStyleL = "fas fa-arrow-left";
-    if (checkArrayLength === 8) {
+    if (checkArrayLength === this.state.imgData.length) {
       const wow = new WOW.WOW();
 
       wow.init();
@@ -216,69 +200,6 @@ class StartGame extends Component {
       ) : (
         <div className="container">
           <ReactAudioPlayer src={createGameMusic} autoPlay loop volume={0.6} />
-          <h1
-            style={{
-              padding: "30px"
-            }}
-          >
-            Upload Your Custom Images
-          </h1>
-          <form
-            onSubmit={this.onSubmitHandler}
-            className="container"
-            style={{
-              marginTop: 25
-            }}
-            encType="multipart/form-data"
-          >
-            <UploadImageForm
-              onChange={this.onChangeHandler}
-              imgData={this.state.imgData}
-            />
-            {checkArrayLength === 8 && (
-              <i
-                data-wow-duration="5s"
-                class={uploadIconStyleR}
-                style={{
-                  fontSize: "45px",
-                  padding: "0 15px",
-                  color: "blue"
-                }}
-              />
-            )}
-            <button
-              style={{
-                height: "10vh",
-                width: "35vw",
-                margin: "5vh auto",
-                fontSize: "35px",
-                padding: "10px"
-              }}
-              data-wow-duration="3s"
-              className={uploadButtonStyle}
-              disabled={checkArrayLength !== 8}
-              type="submit"
-            >
-              {checkArrayLength !== 8 ? (
-                "Please Select " + (8 - checkArrayLength) + " Images"
-              ) : (
-                <Fragment>
-                  <i class="fas fa-upload" /> UPLOAD
-                </Fragment>
-              )}
-            </button>
-            {checkArrayLength === 8 && (
-              <i
-                data-wow-duration="5s"
-                class={uploadIconStyleL}
-                style={{
-                  fontSize: "45px",
-                  padding: "0 15px",
-                  color: "blue"
-                }}
-              />
-            )}
-          </form>
           {this.props.loading ? (
             <Spinner />
           ) : (
@@ -400,6 +321,88 @@ class StartGame extends Component {
               )}
             </Fragment>
           )}
+          <h1
+            style={{
+              padding: "30px"
+            }}
+          >
+            Upload Your Custom Images
+          </h1>
+          <button
+            type="button"
+            onClick={this.onClickHandlerMore}
+            class="btn btn-success mr-3"
+            disabled={this.state.imgData.length === 8}
+          >
+            {" "}
+            + more images
+          </button>
+          <button
+            type="button"
+            onClick={this.onClickHandlerLess}
+            class="btn btn-danger"
+            disabled={this.state.imgData.length === 3}
+          >
+            - less images
+          </button>
+          <form
+            onSubmit={this.onSubmitHandler}
+            className="container"
+            style={{
+              marginTop: 25
+            }}
+            encType="multipart/form-data"
+          >
+            <UploadImageForm
+              onChange={this.onChangeHandler}
+              imgData={this.state.imgData}
+            />
+            {checkArrayLength === this.state.imgData.length && (
+              <i
+                data-wow-duration="5s"
+                class={uploadIconStyleR}
+                style={{
+                  fontSize: "45px",
+                  padding: "0 15px",
+                  color: "blue"
+                }}
+              />
+            )}
+            <button
+              style={{
+                height: "10vh",
+                width: "35vw",
+                margin: "5vh auto",
+                fontSize: "35px",
+                padding: "10px"
+              }}
+              data-wow-duration="3s"
+              className={uploadButtonStyle}
+              disabled={checkArrayLength !== this.state.imgData.length}
+              type="submit"
+            >
+              {checkArrayLength !== this.state.imgData.length ? (
+                "Please Select " +
+                (this.state.imgData.length - checkArrayLength) +
+                " Images"
+              ) : (
+                <Fragment>
+                  <i class="fas fa-upload" /> UPLOAD
+                </Fragment>
+              )}
+            </button>
+            {checkArrayLength === this.state.imgData.length && (
+              <i
+                data-wow-duration="5s"
+                class={uploadIconStyleL}
+                style={{
+                  fontSize: "45px",
+                  padding: "0 15px",
+                  color: "blue"
+                }}
+              />
+            )}
+          </form>
         </div>
       )
     ) : (
