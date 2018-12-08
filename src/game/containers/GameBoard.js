@@ -63,22 +63,29 @@ class GameBoard extends Component {
   };
 
   render() {
- // 
- // this.props.gameImgsData.gameImgsData &&  console.log('the new array data', this.props.gameImgsData.gameImgsData.gamesize * 2)
+    //
+    // this.props.gameImgsData.gameImgsData &&  console.log('the new array data', this.props.gameImgsData.gameImgsData.gamesize * 2)
 
     let cardsList = [];
     let initialCards = [];
+    // let cardsItems =
+    //   (this.props.gameImgsData.gameImgsData &&
+    //     this.props.gameImgsData.gameImgsData.imgsGame.length > 16 &&
+    //     this.props.gameImgsData.gameImgsData.gamesize * 2) ||
+    //   16;
     //initial card background
-    let cardsItems = ( this.props.gameImgsData.gameImgsData && this.props.gameImgsData.gameImgsData.gamesize * 2) || 16
+    // let cardsItems =
+    //   (this.props.gameImgsData.gameImgsData &&
+    //     this.props.gameImgsData.gameImgsData.gamesize * 2) ||
+    //   16;
 
-    for (let i = 0; i < cardsItems; i++) {
+    for (let i = 0; i < 16; i++) {
       initialCards.push(
         <div key={i} className="initialCardsWrapper">
-
           <img
             style={{ width: "100%", height: "100%" }}
             className="backgroundImg"
-            onLoad={this.handleImageLoaded.bind(this)}
+            // onLoad={this.handleImageLoaded.bind(this)}
             //    src={this.props.gameId ? backgroudImgCard : backgroudImgCard}
             src={
               this.props.gameId
@@ -88,8 +95,6 @@ class GameBoard extends Component {
             alt="backgroudImg"
           />
         </div>
-
-
       );
     }
 
@@ -132,13 +137,14 @@ class GameBoard extends Component {
 
 const mapStateToProps = state => {
   return {
+    gameImgsData: null,
+    isPageLoading: state.game.isPageLoading,
     cards: state.game.cards,
     isStarting: state.game.isStarting,
     isLocked: state.game.isLocked,
     gameOn: state.game.gameOn,
     show: state.game.show,
-    isCompleted: state.game.isCompleted,
-    gameImgsData:state.gameImgsData
+    isCompleted: state.game.isCompleted
   };
 };
 

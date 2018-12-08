@@ -8,23 +8,23 @@ export const signup = (dataUser, history) => async dispatch => {
   try {
     dispatch(setAuthLoading());
     const user = await axios.post(
-      /*"https://memory-game-7.herokuapp.com*/"/user/signup",
+      "https://memory-game-7.herokuapp.com/user/signup",
+      // "http://localhost:5000/user/signup",
       dataUser
     );
     if (user) {
-  history.push("/startGame");
-      console.log('Hallo token',user.data);
+      history.push("/startGame");
+      console.log("Hallo token", user.data);
       dispatch(clearErrors());
+      history.push("/startGame");
       localStorage.setItem("tokenMemory", user.data);
-
       setAxiosAuth(user.data);
       const tokenDecoded = jwt_decode(user.data);
       actions.getCurrentGame(tokenDecoded.id);
 
-
       dispatch({
         type: actionType.LOGIN_SUCCEED,
-            payload: tokenDecoded
+        payload: tokenDecoded
       });
     }
   } catch (e) {
@@ -42,7 +42,7 @@ export const login = (data, history) => async dispatch => {
   try {
     dispatch(setAuthLoading());
     const user = await axios.post(
-      /*"https://memory-game-7.herokuapp.com*/"/user/login",
+      "https://memory-game-7.herokuapp.com/user/login",
       data
     );
     if (user) {

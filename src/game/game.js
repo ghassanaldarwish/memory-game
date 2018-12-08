@@ -7,10 +7,21 @@ import jwt_decode from "jwt-decode";
 import setAxiosAuth from "../setAxiosAuthHeader";
 import * as actions from "../store/actions";
 import store from "../store";
+import { connect } from "react-redux";
 import WOW from "wowjs";
 
 class Game extends Component {
   componentDidMount() {
+    if (this.props.gameData) {
+      store.dispatch(
+        actions.onGameImgsData(Number(this.props.gameData.gamesize))
+      );
+      console.log(
+        Number(this.props.gameData.gamesize),
+        "ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg"
+      );
+    }
+
     const wow = new WOW.WOW();
     wow.init();
     if (localStorage.getItem("tokenMemory")) {
@@ -39,4 +50,11 @@ class Game extends Component {
   }
 }
 
-export default withRouter(Game);
+const mapStateToProps = state => ({
+  gameData: state.gameImgsData.gameImgsData
+});
+
+export default connect(
+  mapStateToProps,
+  actions
+)(withRouter(Game));

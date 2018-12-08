@@ -12,9 +12,10 @@ export const getCurrentGame = userId => dispatch => {
   dispatch(setCurrentGameLoading());
   console.log("user id", userId);
   axios
-    .get(/*"https://memory-game-7.herokuapp.com*/"/game/" + userId)
+    .get("https://memory-game-7.herokuapp.com/game/" + userId)
     .then(game => {
       console.log(game.data.imgsGame);
+
       dispatch({
         type: actionType.FETCT_CURRENT_GAME,
         payload: game.data

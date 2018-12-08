@@ -9,6 +9,8 @@ export const LOGOUT_SUCCEED = "LOGOUT_SUCCEED";
 export const LOGIN_FAILED = "LOGIN_FAILED";
 
 // game actions types
+
+export const GAME_IMGS_DATA = "GAME_IMGS_DATA";
 export const PAGE_LOADING = "PAGE_LOADING";
 export const START_GAME = "START_GAME";
 export const FLIP_CARD = "FLIP_CARD";

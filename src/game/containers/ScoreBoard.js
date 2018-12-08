@@ -68,9 +68,9 @@ class ScoreBoard extends Component {
     return (
       <Fragment>
         {this.props.isCompleted && <ReactAudioPlayer src={winSound} autoPlay />}
-        {this.props.cards.length > 0 && !this.props.isCompleted && (
+        {/* {this.props.cards.length > 0 && !this.props.isCompleted && (
           <ReactAudioPlayer src={music} autoPlay loop volume={0.6} />
-        )}
+        )} */}
 
         <div
           className={
