@@ -205,18 +205,20 @@ class StartGame extends Component {
     const data = {
       email: this.state.email,
 
-      url: `https://memory-game-a17c2.firebaseapp.com/game-custom/${
+      url: `https://memory-game-fb235.firebaseapp.com/game-custom/${
         this.props.user.username
       }/${this.props.gameImgsData.user}`,
       name: this.props.user.username
     };
 
-    axios.post("http://localhost:5000/game/email", data).then(res => {
-      this.setState({ send: true });
-      setInterval(() => {
-        this.setState({ send: false, email: "" });
-      }, 5000);
-    });
+    axios
+      .post("https://customise-memory-game.herokuapp.com/game/email", data)
+      .then(res => {
+        this.setState({ send: true });
+        setInterval(() => {
+          this.setState({ send: false, email: "" });
+        }, 5000);
+      });
   };
 
   render() {
@@ -411,7 +413,7 @@ class StartGame extends Component {
                               resize: "none"
                             }}
                             id="blob-path"
-                            value={`https://memory-game-a17c2.firebaseapp.com/game-custom/${
+                            value={`https://memory-game-fb235.firebaseapp.com/game-custom/${
                               this.props.user.username
                             }/${this.props.gameImgsData.user}`}
                             disabled
