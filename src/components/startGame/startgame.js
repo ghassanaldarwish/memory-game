@@ -45,6 +45,7 @@ const styles = {
 
 class StartGame extends Component {
   state = {
+    send: false,
     email: "",
     loading: false,
     gamesize: 3,
@@ -200,7 +201,22 @@ class StartGame extends Component {
 
   onSubmitEmailHandler = e => {
     e.preventDefault();
-    console.log(" the game sent to: ", this.state.email);
+
+    const data = {
+      email: this.state.email,
+
+      url: `https://memory-game-a17c2.firebaseapp.com/game-custom/${
+        this.props.user.username
+      }/${this.props.gameImgsData.user}`,
+      name: this.props.user.username
+    };
+
+    axios.post("http://localhost:5000/game/email", data).then(res => {
+      this.setState({ send: true });
+      setInterval(() => {
+        this.setState({ send: false, email: "" });
+      }, 5000);
+    });
   };
 
   render() {
@@ -228,6 +244,7 @@ class StartGame extends Component {
       ) : (
         <div className="container">
           <ReactAudioPlayer src={createGameMusic} autoPlay loop volume={0.6} />
+
           {this.props.loading ? (
             <Spinner />
           ) : (
@@ -291,61 +308,78 @@ class StartGame extends Component {
                               role="document"
                             >
                               <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5
-                                    class="modal-title"
-                                    id="exampleModalCenterTitle"
+                                {this.state.send ? (
+                                  <div
+                                    class="alert alert-success"
+                                    role="alert"
+                                    style={{ marginBottom: "unset" }}
                                   >
-                                    Share With Frinds By Email
-                                  </h5>
-                                  <button
-                                    type="button"
-                                    class="close"
-                                    data-dismiss="modal"
-                                    aria-label="Close"
-                                  >
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body">
-                                  <form onSubmit={this.onSubmitEmailHandler}>
-                                    <div class="form-group">
-                                      <label for="exampleInputEmail1">
-                                        Email address
-                                      </label>
-                                      <input
-                                        onChange={e =>
-                                          this.setState({
-                                            email: e.target.value
-                                          })
-                                        }
-                                        name="email"
-                                        type="email"
-                                        class="form-control"
-                                        id="exampleInputEmail1"
-                                        aria-describedby="emailHelp"
-                                        placeholder="Enter email"
-                                      />
-                                      <small
-                                        id="emailHelp"
-                                        class="form-text text-muted"
+                                    The Email Sent To: {this.state.email}!
+                                  </div>
+                                ) : (
+                                  <Fragment>
+                                    <div class="modal-header">
+                                      <h5
+                                        class="modal-title"
+                                        id="exampleModalCenterTitle"
                                       >
-                                        please typing a valid email address
-                                      </small>
+                                        Share With Frinds By Email
+                                      </h5>
+                                      <button
+                                        type="button"
+                                        class="close"
+                                        data-dismiss="modal"
+                                        aria-label="Close"
+                                      >
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
                                     </div>
-                                    <button
-                                      type="submit"
-                                      class="btn btn-primary"
-                                    >
-                                      send
-                                    </button>
-                                  </form>
-                                </div>
+                                    <div class="modal-body">
+                                      <form
+                                        onSubmit={this.onSubmitEmailHandler}
+                                      >
+                                        <div class="form-group">
+                                          <label for="exampleInputEmail1">
+                                            Email address
+                                          </label>
+                                          <input
+                                            onChange={e =>
+                                              this.setState({
+                                                email: e.target.value
+                                              })
+                                            }
+                                            name="email"
+                                            type="email"
+                                            class="form-control"
+                                            id="exampleInputEmail1"
+                                            aria-describedby="emailHelp"
+                                            placeholder="Enter email"
+                                          />
+                                          <small
+                                            id="emailHelp"
+                                            class="form-text text-muted"
+                                          >
+                                            please typing a valid email address
+                                          </small>
+                                        </div>
+                                        <button
+                                          disabled={
+                                            this.state.email.trim().length < 3
+                                          }
+                                          type="submit"
+                                          class="btn btn-primary"
+                                        >
+                                          send
+                                        </button>
+                                      </form>
+                                    </div>
+                                  </Fragment>
+                                )}
                               </div>
                             </div>
                           </div>
 
-                          <textarea
+                          {/* <textarea
                             style={{
                               height: "89px",
                               width: "100%",
@@ -368,15 +402,15 @@ class StartGame extends Component {
                           >
                             <i class="far fa-copy" />
                             Copy
-                          </clipboard-copy>
+                          </clipboard-copy> */}
                           <textarea
                             style={{
-                              height: "80px",
+                              height: "103px",
                               width: "100%",
                               wordBreak: "break-word",
                               resize: "none"
                             }}
-                            id="blob-path2"
+                            id="blob-path"
                             value={`https://memory-game-a17c2.firebaseapp.com/game-custom/${
                               this.props.user.username
                             }/${this.props.gameImgsData.user}`}
@@ -387,7 +421,7 @@ class StartGame extends Component {
                               position: "absolute",
                               right: "35px"
                             }}
-                            for="blob-path2"
+                            for="blob-path"
                             class="btn btn-outline-danger "
                           >
                             <i class="far fa-copy" />
