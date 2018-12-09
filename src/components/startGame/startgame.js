@@ -27,6 +27,8 @@ import "./startGame.css";
 import Register from "../register/register";
 import "clipboard-copy-element";
 import createGameMusic from "../../assets/createGame.mp3";
+import Spring from "../../assets/Spring.mp3";
+
 import ReactAudioPlayer from "react-audio-player";
 
 const styles = {
@@ -270,7 +272,7 @@ class StartGame extends Component {
         <Spinner />
       ) : (
         <div className="container">
-          <ReactAudioPlayer src={createGameMusic} autoPlay loop volume={0.6} />
+          <ReactAudioPlayer src={createGameMusic} autoPlay loop volume={0.1} />
 
           {this.props.loading ? (
             <Spinner />
@@ -334,9 +336,10 @@ class StartGame extends Component {
                             aria-hidden="true"
                           >
                             <div
-                              class="modal-dialog modal-dialog-centered"
+                              class="modal-dialog modal-dialog-centered wow  bounceIn"
                               role="document"
                             >
+                              <ReactAudioPlayer src={Spring} autoPlay />
                               <div class="modal-content">
                                 {this.state.send ? (
                                   <div
@@ -504,15 +507,21 @@ class StartGame extends Component {
             encType="multipart/form-data"
           >
             {this.state.imgTypeInvalid && (
-              <div class="alert alert-danger" role="alert">
-                image file type invalid! select one of those image types
-                (png,jpg,jpeg,svg)
-              </div>
+              <Fragment>
+                <ReactAudioPlayer src={Spring} autoPlay />
+                <div class="alert alert-danger wow  bounceIn" role="alert">
+                  image file type invalid! select one of those image types
+                  (png,jpg,jpeg,svg)
+                </div>
+              </Fragment>
             )}
             {this.state.imgSizeInvalid && (
-              <div class="alert alert-danger" role="alert">
-                image size invalid the image size should be less then (1M)
-              </div>
+              <Fragment>
+                <ReactAudioPlayer src={Spring} autoPlay />
+                <div class="alert alert-danger wow  bounceIn" role="alert">
+                  image size invalid the image size should be less then (1M)
+                </div>
+              </Fragment>
             )}
 
             <UploadImageForm
