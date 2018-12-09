@@ -137,7 +137,6 @@ class GameBoard extends Component {
 
 const mapStateToProps = state => {
   return {
-    gameImgsData: null,
     isPageLoading: state.game.isPageLoading,
     cards: state.game.cards,
     isStarting: state.game.isStarting,

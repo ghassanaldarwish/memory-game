@@ -262,7 +262,7 @@ class StartGame extends Component {
                 >
                   <div className="row">
                     <div className="col-8">
-                      <div className="row">
+                      <div className="row justify-content-center">
                         {this.props.gameImgsData.imgsGame.map(items => (
                           <div
                             style={{ width: "150px", height: "150px" }}
@@ -271,7 +271,10 @@ class StartGame extends Component {
                           >
                             <div class="card">
                               <img
-                                style={{ height: "100%" }}
+                                style={{
+                                  height: "100%",
+                                  borderRadius: "inherit"
+                                }}
                                 className="card-img-top"
                                 src={items.img}
                               />
@@ -290,7 +293,7 @@ class StartGame extends Component {
                           </label>
                           <button
                             type="button"
-                            class="btn btn-primary mb-3"
+                            class="btn btn-info mb-3"
                             data-toggle="modal"
                             data-target="#exampleModalCenter"
                           >
@@ -381,30 +384,6 @@ class StartGame extends Component {
                             </div>
                           </div>
 
-                          {/* <textarea
-                            style={{
-                              height: "89px",
-                              width: "100%",
-                              wordBreak: "break-word",
-                              resize: "none"
-                            }}
-                            id="blob-path"
-                            value={`https://customise-memory-game.herokuapp.com/game-custom/${
-                              this.props.user.username
-                            }/${this.props.gameImgsData.user}`}
-                            disabled
-                          />
-                          <clipboard-copy
-                            style={{
-                              position: "absolute",
-                              right: "35px"
-                            }}
-                            for="blob-path"
-                            class="btn btn-outline-info "
-                          >
-                            <i class="far fa-copy" />
-                            Copy
-                          </clipboard-copy> */}
                           <textarea
                             style={{
                               height: "103px",
@@ -421,7 +400,7 @@ class StartGame extends Component {
                           <clipboard-copy
                             style={{
                               position: "absolute",
-                              right: "35px"
+                              right: "15px"
                             }}
                             for="blob-path"
                             class="btn btn-outline-danger "
@@ -467,6 +446,9 @@ class StartGame extends Component {
           >
             Upload Your Custom Images
           </h1>
+          <h3 className="mb-2 pb-4" style={{ color: "#4DABF4" }}>
+            You can select and upload 3-8 images ;)
+          </h3>
           <button
             type="button"
             onClick={this.onClickHandlerMore}
