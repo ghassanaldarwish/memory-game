@@ -212,7 +212,7 @@ class StartGame extends Component {
     };
 
     axios
-      .post("https://customise-memory-game.herokuapp.com/game/email", data)
+      .post("https://memory-game-7.herokuapp.com/game/email", data)
       .then(res => {
         this.setState({ send: true });
         setInterval(() => {
