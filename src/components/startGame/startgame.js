@@ -339,7 +339,6 @@ class StartGame extends Component {
                               class="modal-dialog modal-dialog-centered wow  bounceIn"
                               role="document"
                             >
-                              <ReactAudioPlayer src={Spring} autoPlay />
                               <div class="modal-content">
                                 {this.state.send ? (
                                   <div
