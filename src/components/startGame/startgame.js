@@ -45,6 +45,8 @@ const styles = {
 
 class StartGame extends Component {
   state = {
+    imgTypeInvalid: false,
+    imgSizeInvalid: false,
     send: false,
     email: "",
     loading: false,
@@ -151,22 +153,38 @@ class StartGame extends Component {
   };
 
   onChangeHandler = e => {
-    console.log("Change Handler");
-    const updateState = {
-      ...this.state,
-      imgData: [...this.state.imgData]
-    };
-    const newimgData = updateState.imgData.map(item => {
-      if (item.name === e.target.name) {
-        item.filedata = e.target.files[0];
-        item.imgUrl = URL.createObjectURL(e.target.files[0]);
+    if (e.target.files[0] && e.target.files[0].size < 1048576) {
+      this.setState({ imgSizeInvalid: false });
+      if (
+        e.target.files[0].type === "image/jpeg" ||
+        e.target.files[0].type === "image/png" ||
+        e.target.files[0].type === "image/jpg" ||
+        e.target.files[0].type === "image/svg"
+      ) {
+        this.setState({ imgTypeInvalid: false });
+        const updateState = {
+          ...this.state,
+          imgData: [...this.state.imgData]
+        };
+        const newimgData = updateState.imgData.map(item => {
+          if (item.name === e.target.name) {
+            item.filedata = e.target.files[0];
+            item.imgUrl = URL.createObjectURL(e.target.files[0]);
+          }
+        });
+        this.setState({ imgData: updateState.imgData });
+        console.log(updateState);
+        console.log({
+          [e.target.name]: e.target.files[0]
+        });
+      } else {
+        this.setState({ imgTypeInvalid: true });
+        setTimeout(() => this.setState({ imgTypeInvalid: false }), 6000);
       }
-    });
-    this.setState({ imgData: updateState.imgData });
-    console.log(updateState);
-    console.log({
-      [e.target.name]: e.target.files[0]
-    });
+    } else {
+      this.setState({ imgSizeInvalid: true });
+      setTimeout(() => this.setState({ imgSizeInvalid: false }), 6000);
+    }
   };
   onClickHandlerMore = e => {
     let newImageData = {
@@ -215,13 +233,20 @@ class StartGame extends Component {
       .post("https://memory-game-7.herokuapp.com/game/email", data)
       .then(res => {
         this.setState({ send: true });
-        setInterval(() => {
+        setTimeout(() => {
           this.setState({ send: false, email: "" });
         }, 5000);
       });
   };
 
   render() {
+    console.log(
+      "imgTypeInvalid: ",
+      this.state.imgTypeInvalid,
+      " imgSizeInvalid: ",
+      this.state.imgSizeInvalid
+    );
+
     console.log("real new state", this.state.imgData, this.state);
     const checkArrayLength = this.state.imgData.filter(
       item => item.filedata !== null
@@ -446,9 +471,13 @@ class StartGame extends Component {
           >
             Upload Your Custom Images
           </h1>
-          <h3 className="mb-2 pb-4" style={{ color: "#4DABF4" }}>
+          <h3 className="mb-1 pb-1" style={{ color: "#4DABF4" }}>
             You can select and upload 3-8 images ;)
           </h3>
+          <h4 className="mb-1 pb-3" style={{ color: "#FFCA28" }}>
+            the single image size should be 1MB or less <br />
+            the file type should be ( png , jpg, jpeg Or svg)
+          </h4>
           <button
             type="button"
             onClick={this.onClickHandlerMore}
@@ -474,6 +503,18 @@ class StartGame extends Component {
             }}
             encType="multipart/form-data"
           >
+            {this.state.imgTypeInvalid && (
+              <div class="alert alert-danger" role="alert">
+                image file type invalid! select one of those image types
+                (png,jpg,jpeg,svg)
+              </div>
+            )}
+            {this.state.imgSizeInvalid && (
+              <div class="alert alert-danger" role="alert">
+                image size invalid the image size should be less then (1M)
+              </div>
+            )}
+
             <UploadImageForm
               onChange={this.onChangeHandler}
               imgData={this.state.imgData}
