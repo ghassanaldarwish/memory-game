@@ -1,5 +1,7 @@
 ## Memory Game (MERN full stack app)
 
+#### The backend repository
+[The backend repository on github](https://github.com/Bierwurst/memory-game-backend-juergen)
 
 
 ![Screenshot](src/assets/mem-home.gif)
